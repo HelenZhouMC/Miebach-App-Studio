@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
+import Home from "./screens/Home";
+import LogIn from "./screens/LogIn";
+import Capacity from "./screens/Capacity";
+import Power from "./screens/Power";
+import Cost from "./screens/Cost";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route
+          path="/capacity-management-with-forecast"
+          element={<Capacity />}
+        />
+        <Route path="/power-of-ai" element={<Power />} />
+        <Route path="/cost-to-serve-optimization" element={<Cost />} />
+        <Route path="/" element={<Navigate replace to="/login" />} />
+      </Routes>
     </div>
   );
 }
