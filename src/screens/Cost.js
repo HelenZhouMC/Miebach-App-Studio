@@ -224,7 +224,7 @@ const CardContent = styled.div`
   border-radius: 16px;
   cursor: pointer;
 `;
-const Image = styled.img`
+const Image = styled.div`
   width: 100%;
   height: 60vh;
   object-fit: cover;
@@ -234,6 +234,13 @@ const Image = styled.img`
   &:hover {
     border: 1px solid #9f2733;
   }
+  background: radial-gradient(
+      142.52% 126.57% at 2.83% 3.89%,
+      rgba(20, 28, 27, 0) 0%,
+      #141c1b 75%
+    ),
+    url(${(props) => props.src}), lightgray 50% / cover no-repeat;
+  background-size: cover;
 `;
 const CardTitle = styled.div`
   position: absolute;

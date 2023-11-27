@@ -339,7 +339,7 @@ const WarehouseDiv = styled.div`
   align-items: center;
   overflow: hidden;
 `;
-const WarehouseImage = styled.img`
+const WarehouseImage = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -352,6 +352,13 @@ const WarehouseImage = styled.img`
   &:hover {
     border: 1px solid #9f2733;
   }
+  background: radial-gradient(
+      142.52% 126.57% at 2.83% 3.89%,
+      rgba(20, 28, 27, 0) 0%,
+      #141c1b 60%
+    ),
+    url(${(props) => props.src}), lightgray 50% / cover no-repeat;
+  background-size: cover;
 `;
 const SecondRow = styled.div`
   flex: 2;
@@ -372,7 +379,7 @@ const CardContent = styled.div`
   height: 100%;
   overflow: hidden;
 `;
-const Image = styled.img`
+const Image = styled.div`
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -382,7 +389,15 @@ const Image = styled.img`
   &:hover {
     border: 1px solid #9f2733;
   }
+  background: radial-gradient(
+      142.52% 126.57% at 2.83% 3.89%,
+      rgba(20, 28, 27, 0) 0%,
+      #141c1b 75%
+    ),
+    url(${(props) => props.src}), lightgray 50% / cover no-repeat;
+  background-size: cover;
 `;
+
 const CardTitle = styled.div`
   position: absolute;
   left: 0;

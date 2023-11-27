@@ -43,6 +43,7 @@ const Logo = styled.div`
   flex: 1 0 0;
   img {
     width: 171px;
+    filter: brightness(0) invert(1);
   }
 `;
 const LoginForm = styled.div`

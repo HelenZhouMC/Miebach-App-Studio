@@ -103,6 +103,7 @@ const CardsContainer = styled.div`
   flex-wrap: wrap;
   border-radius: 16px;
 `;
+
 const Card = styled.div`
   display: flex;
   width: calc(25% - 16px);
@@ -131,6 +132,18 @@ const CardContent = styled.div`
     opacity: 1;
   }
 `;
+const CardsBG = styled.div`
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      187.84% 132.62% at 2.83% 3.89%,
+      rgba(20, 28, 27, 0) 0%,
+      #141c1b 75%
+    ),
+    url(${(props) => props.imgUrl}), lightgray 50% / cover no-repeat;
+  background-size: cover;
+`;
+
 const CardTitle = styled.div`
   position: absolute;
   bottom: 10px;
@@ -180,72 +193,82 @@ function Home() {
       <CardsContainer>
         <Card>
           <CardContent>
-            <img src={CapacityStrategic} alt="Strategic capacity management" />
+            <CardsBG imgUrl={CapacityStrategic} />
+            {/* <img src={CapacityStrategic} alt="Strategic capacity management" /> */}
             <CardTitle>Strategic capacity management</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img src={CapacityTactical} alt="Tactical capacity planning" />
+            <CardsBG imgUrl={CapacityTactical} />
+            {/* <img src={CapacityTactical} alt="Tactical capacity planning" /> */}
             <CardTitle>Tactical capacity planning</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img src={CapacityOperational} alt="Operational planning" />
+            <CardsBG imgUrl={CapacityOperational} />
+            {/* <img src={CapacityOperational} alt="Operational planning" /> */}
             <CardTitle>Operational planning</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img src={CapacityWarehouse} alt="Warehouse Conceptual Design" />
+            <CardsBG imgUrl={CapacityWarehouse} />
+            {/* <img src={CapacityWarehouse} alt="Warehouse Conceptual Design" /> */}
             <CardTitle>Warehouse Conceptual Design</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img src={CapacityControl} alt="Control tower" />
+            <CardsBG imgUrl={CapacityControl} />
+            {/* <img src={CapacityControl} alt="Control tower" /> */}
             <CardTitle>Control tower</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img src={PowerDemand} alt="Demand forecast" />
+            <CardsBG imgUrl={PowerDemand} />
+            {/* <img src={PowerDemand} alt="Demand forecast" /> */}
             <CardTitle>Demand forecast</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img
+            <CardsBG imgUrl={PowerPredictive} />
+            {/* <img
               src={PowerPredictive}
               alt="Predictive data models"
               width="300%"
               height="100%"
-            />
+            /> */}
             <CardTitle>Predictive data models</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img src={PowerRoot} alt="Root cause detector" />
+            <CardsBG imgUrl={PowerRoot} />
+            {/* <img src={PowerRoot} alt="Root cause detector" /> */}
             <CardTitle>Root cause detector</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img
+            <CardsBG imgUrl={CostNetwork} />
+            {/* <img
               src={CostNetwork}
               alt="Network Cost to Serve and Flow Optimization"
-            />
+            /> */}
             <CardTitle>Network Cost to Serve and Flow Optimization</CardTitle>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <img
+            <CardsBG imgUrl={CostOperational} />
+            {/* <img
               src={CostOperational}
               alt="Operational Cost to Serve and Flow Optimization"
-            />
+            /> */}
             <CardTitle>
               Operational Cost to Serve and Flow Optimization
             </CardTitle>
