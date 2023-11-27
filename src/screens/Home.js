@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import header from "../images/header.jpg";
+import header from "../images/HeaderBG.png";
 import CapacityControl from "../images/CapacityControl.jpg";
 import CapacityOperational from "../images/CapacityOperational.jpg";
 import CapacityStrategic from "../images/CapacityStrategic.jpg";
@@ -28,23 +28,15 @@ const Header = styled.div`
   gap: 4px;
   flex: 1 0 0;
   border-radius: 16px;
-  border: 1px solid #141c1b;
-  background: url(${header}) no-repeat;
-  background-position: center calc(0% - 500px);
+  background: linear-gradient(
+      180deg,
+      rgba(20, 28, 27, 0.8) 0%,
+      rgba(20, 28, 27, 0) 100%
+    ),
+    url(${header}), lightgray 50% / cover no-repeat;
+  background-position: center;
   background-size: cover;
   position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #781935;
-    opacity: 0.5;
-    border-radius: 16px;
-    z-index: 1;
-  }
 `;
 const NaviBar = styled.div`
   display: flex;
@@ -119,7 +111,7 @@ const Card = styled.div`
   align-items: center;
   position: relative;
   border-radius: 16px;
-  border: 1px solid #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   overflow: hidden;
   z-index: 3;
 `;

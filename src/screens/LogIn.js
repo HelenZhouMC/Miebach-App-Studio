@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import header from "../images/header.jpg";
+import header from "../images/HeaderBG.png";
 import logo from "../images/loginLogo.png";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -25,8 +25,14 @@ const LoginDiv = styled.div`
   gap: 4px;
   border-radius: 16px;
   border: 1px solid black;
-  background: url(${header}) no-repeat;
-  background-position: center calc(0% - 400px);
+  background: linear-gradient(
+      180deg,
+      rgba(20, 28, 27, 0.8) 0%,
+      rgba(20, 28, 27, 0) 100%
+    ),
+    url(${header}), lightgray 50% / cover no-repeat;
+  background-position: center;
+  background-size: cover;
   background-size: cover;
 `;
 const Logo = styled.div`

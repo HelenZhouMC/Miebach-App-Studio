@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import header from "../images/header.jpg";
+import header from "../images/HeaderBG.png";
 import CostNetwork from "../images/CostNetwork.jpg";
 import CostOperational from "../images/CostOperational.jpg";
 
@@ -20,22 +20,15 @@ const Header = styled.div`
   gap: 4px;
   flex: 1 0 0;
   border-radius: 16px;
-  background: url(${header}) no-repeat;
-  background-position: center calc(0% - 500px);
+  background: linear-gradient(
+      180deg,
+      rgba(20, 28, 27, 0.8) 0%,
+      rgba(20, 28, 27, 0) 100%
+    ),
+    url(${header}), lightgray 50% / cover no-repeat;
+  background-position: center;
   background-size: cover;
   position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #781935;
-    opacity: 0.5;
-    border-radius: 16px;
-    z-index: 1;
-  }
 `;
 const NaviBar = styled.div`
   display: flex;
