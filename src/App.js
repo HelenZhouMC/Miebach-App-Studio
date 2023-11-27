@@ -5,6 +5,7 @@ import LogIn from "./screens/LogIn";
 import Capacity from "./screens/Capacity";
 import Power from "./screens/Power";
 import Cost from "./screens/Cost";
+import Test from "./screens/test";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         />
         <Route path="/power-of-ai" element={<Power />} />
         <Route path="/cost-to-serve-optimization" element={<Cost />} />
+        {/* <Route path="/test" element={<Test />} /> */}
         <Route path="/" element={<Navigate replace to="/login" />} />
       </Routes>
     </div>
