@@ -8,6 +8,7 @@ import CapacityOperational from "../images/CapacityOperational.jpg";
 import CapacityStrategic from "../images/CapacityStrategic.jpg";
 import CapacityTactical from "../images/CapacityTactical.jpg";
 import CapacityWarehouse from "../images/CapacityWarehouse.jpg";
+import withPageTransition from "../hooks/withPageTransition";
 
 const Background = styled.div`
   background-color: #141c1b;
@@ -445,15 +446,22 @@ function Capacity() {
             <Digital>Digital</Digital>
           </Logo>
           <TaskBar>
-            <Task to="/home">My apps</Task>
+            <Task to="/home" state={{ animation: "slideRight" }}>
+              My apps
+            </Task>
             <Task
               to="/capacity-management-with-forecast"
               style={{ fontWeight: "650" }}
             >
               Capacity management with foresight
             </Task>
-            <Task to="/power-of-ai">Power of AI</Task>
-            <Task to="/cost-to-serve-optimization">
+            <Task to="/power-of-ai" state={{ animation: "slideLeft" }}>
+              Power of AI
+            </Task>
+            <Task
+              to="/cost-to-serve-optimization"
+              state={{ animation: "slideLeft" }}
+            >
               Cost to serve & optimization
             </Task>
           </TaskBar>

@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import withPageTransition from "../hooks/withPageTransition";
+
 import header from "../images/HeaderBG.png";
 import CapacityControl from "../images/CapacityControl.jpg";
 import CapacityOperational from "../images/CapacityOperational.jpg";
@@ -171,11 +174,19 @@ function Home() {
             <Task to="/home" style={{ fontWeight: "650" }}>
               My apps
             </Task>
-            <Task to="/capacity-management-with-forecast">
+            <Task
+              to="/capacity-management-with-forecast"
+              state={{ animation: "slideLeft" }}
+            >
               Capacity management with foresight
             </Task>
-            <Task to="/power-of-ai">Power of AI</Task>
-            <Task to="/cost-to-serve-optimization">
+            <Task to="/power-of-ai" state={{ animation: "slideLeft" }}>
+              Power of AI
+            </Task>
+            <Task
+              to="/cost-to-serve-optimization"
+              state={{ animation: "slideLeft" }}
+            >
               Cost to serve & optimization
             </Task>
           </TaskBar>

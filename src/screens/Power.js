@@ -6,6 +6,7 @@ import header from "../images/HeaderBG.png";
 import PowerDemand from "../images/PowerDemand.jpg";
 import PowerPredictive from "../images/PowerPredictive.jpg";
 import PowerRoot from "../images/PowerRoot.jpg";
+import withPageTransition from "../hooks/withPageTransition";
 
 const Background = styled.div`
   background-color: #141c1b;
@@ -280,14 +281,22 @@ function Power() {
             <Digital>Digital</Digital>
           </Logo>
           <TaskBar>
-            <Task to="/home">My apps</Task>
-            <Task to="/capacity-management-with-forecast">
+            <Task to="/home" state={{ animation: "slideRight" }}>
+              My apps
+            </Task>
+            <Task
+              to="/capacity-management-with-forecast"
+              state={{ animation: "slideRight" }}
+            >
               Capacity management with foresight
             </Task>
             <Task to="/power-of-ai" style={{ fontWeight: "650" }}>
               Power of AI
             </Task>
-            <Task to="/cost-to-serve-optimization">
+            <Task
+              to="/cost-to-serve-optimization"
+              state={{ animation: "slideLeft" }}
+            >
               Cost to serve & optimization
             </Task>
           </TaskBar>

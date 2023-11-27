@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import header from "../images/HeaderBG.png";
 import CostNetwork from "../images/CostNetwork.jpg";
 import CostOperational from "../images/CostOperational.jpg";
+import withPageTransition from "../hooks/withPageTransition";
 
 const Background = styled.div`
   background-color: #141c1b;
@@ -280,11 +281,18 @@ function Cost() {
             <Digital>Digital</Digital>
           </Logo>
           <TaskBar>
-            <Task to="/home">My apps</Task>
-            <Task to="/capacity-management-with-forecast">
+            <Task to="/home" state={{ animation: "slideRight" }}>
+              My apps
+            </Task>
+            <Task
+              to="/capacity-management-with-forecast"
+              state={{ animation: "slideRight" }}
+            >
               Capacity management with foresight
             </Task>
-            <Task to="/power-of-ai">Power of AI</Task>
+            <Task to="/power-of-ai" state={{ animation: "slideRight" }}>
+              Power of AI
+            </Task>
             <Task
               to="/cost-to-serve-optimization"
               style={{ fontWeight: "650" }}
