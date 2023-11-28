@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PowerDemand from "../images/PowerDemand.jpg";
@@ -28,7 +28,6 @@ const ImageContainer = styled.div`
   border-radius: 16px;
   margin-left: 30px;
 `;
-
 const DetailContainer = styled.div`
   flex: 1;
   display: flex;
@@ -50,8 +49,55 @@ const DetailContainer = styled.div`
     background: linear-gradient(to right, #141c1b 50%, rgba(0, 0, 0, 0) 100%);
     z-index: 2;
   }
+  animation: ${(props) => {
+      if (props.animationPhase === "out") {
+        return props.slidedirection === "up" ? slideOutUp : slideOutDown;
+      } else {
+        return props.slidedirection === "up" ? slideInUp : slideInDown;
+      }
+    }}
+    0.3s ease-in-out forwards;
 `;
-
+const slideInUp = keyframes`
+  from {
+    transform: translateY(10vh);
+    opacity:0;
+  }
+  to {
+    transform: translateY(0);
+    opacity:1;
+  }
+`;
+const slideOutDown = keyframes`
+  from {
+    transform: translateY(0);
+    opacity:1;
+  }
+  to {
+    transform: translateY(10vh);
+    opacity:0;
+  }
+`;
+const slideOutUp = keyframes`
+  from {
+    transform: translateY(0);
+    opacity:1;
+  }
+  to {
+    transform: translateY(-10vh); 
+    opacity:0;
+  }
+`;
+const slideInDown = keyframes`
+  from {
+    transform: translateY(-10vh);
+    opacity:0;
+  }
+  to {
+    transform: translateY(0);
+    opacity:1;
+  }
+`;
 const Detail = styled.div`
   position: absolute;
   top: 0;
@@ -137,7 +183,6 @@ const OpenButton = styled(Link)`
   line-height: 16px;
   margin-left: 10px;
 `;
-
 const CardContent = styled.div`
   position: relative;
   display: flex;
@@ -186,17 +231,50 @@ function PowerCards() {
     title: `Demand forecast`,
     description: `The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
   });
-  const [slideDirection, setSlideDirection] = useState("up");
+  const [previousImage, setPreviousImage] = useState(null);
+  const [animationPhase, setAnimationPhase] = useState("in");
 
   const selectImage = (image) => {
-    setSlideDirection(image.id > selectedImage?.id ? "up" : "down");
-    setSelectedImage(image);
+    if (selectedImage.id !== image.id) {
+      setAnimationPhase("out");
+      setPreviousImage(selectedImage);
+      setSelectedImage(image);
+
+      setTimeout(() => {
+        setAnimationPhase("in");
+      }, 300);
+    }
   };
 
   return (
     <CardsContainer>
-      {selectedImage && (
-        <DetailContainer slideDirection={slideDirection}>
+      {previousImage && animationPhase === "out" && (
+        <DetailContainer
+          slidedirection={previousImage.id > selectedImage.id ? "down" : "up"}
+          animationPhase={animationPhase}
+        >
+          <Detail>
+            <img src={previousImage.src} alt="selected card"></img>
+            <TextOverlay>
+              <SelectedTitle>
+                {previousImage.title}
+                <SelectedDescription>
+                  {previousImage.description}
+                </SelectedDescription>
+              </SelectedTitle>
+              <ButtonGroup>
+                <DemoButton>See Demo</DemoButton>
+                <OpenButton>Open</OpenButton>
+              </ButtonGroup>
+            </TextOverlay>
+          </Detail>
+        </DetailContainer>
+      )}
+      {selectedImage && animationPhase === "in" && (
+        <DetailContainer
+          slidedirection={selectedImage.id > previousImage?.id ? "up" : "down"}
+          animationPhase={animationPhase}
+        >
           <Detail>
             <img src={selectedImage.src} alt="selected card"></img>
             <TextOverlay>
