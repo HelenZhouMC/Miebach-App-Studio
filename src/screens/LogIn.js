@@ -42,7 +42,7 @@ const Logo = styled.div`
   gap: 4px;
   flex: 1 0 0;
   img {
-    width: 171px;
+    width: 60%;
     filter: brightness(0) invert(1);
   }
 `;

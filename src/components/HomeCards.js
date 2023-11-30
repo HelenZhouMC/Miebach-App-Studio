@@ -10,7 +10,7 @@ import CapacityWarehouse from "../images/CapacityWarehouse.jpg";
 import PowerDemand from "../images/PowerDemand.jpg";
 import PowerPredictive from "../images/PowerPredictive.jpg";
 import PowerRoot from "../images/PowerRoot.jpg";
-import CostNetwork from "../images/CostNetwork.jpg";
+import CostNetwork from "../images/CostNetwork.png";
 import CostOperational from "../images/CostOperational.jpg";
 
 const CardsContainer = styled.div`
@@ -20,7 +20,7 @@ const CardsContainer = styled.div`
   padding: 16px 22px;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 16px;
+  gap: 4%;
   flex-wrap: wrap;
   border-radius: 16px;
 `;
@@ -38,8 +38,9 @@ const CardsBG = styled.div`
 `;
 const Card = styled.div`
   display: flex;
-  width: calc(25% - 16px);
-  padding-top: calc(25% - 16px);
+  width: calc(25% - 4%);
+  padding-top: calc(25% - 4%);
+  margin-bottom: 4%;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -87,6 +88,13 @@ const CardTitle = styled.div`
   opacity: ${(props) => (props.isHovered ? 0 : 1)};
   transform: translateY(${(props) => (props.isHovered ? "-100%" : "0")});
   visibility: ${(props) => (props.isHovered ? "hidden" : "visible")};
+`;
+const CardDetails = styled.div`
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const CardDescription = styled.p`
   color: #fff;
@@ -162,23 +170,16 @@ function HomeCards() {
     {
       id: 1,
       imgUrl: CapacityStrategic,
-      title: "Strategic capacity management",
-      description: `As the client's business expands, a
-    strategic capacity planning tool
-    becomes crucial. It offers visibility
-    into future growth impacts and
-    helps prepare for challenges such as
-    capacity constraints, supply chain
-    disruptions, and resource shortages.
-    This tool enables proactive
-    measures to effectively address
-    these challenges.`,
+      title: "Facility Planner",
+      description: `
+      As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
     },
     {
       id: 2,
       imgUrl: CapacityTactical,
-      title: "Tactical capacity planning",
-      description: "PlaceHolder",
+      title: "Seasonal DC Planner",
+      description:
+        "A tactical planning tool facilitates visibility, foresight, and capacity planning capabilities. It allows for dynamic system configuration updates, improves master data management, and offers support for routing, housekeeping and returns activities to ensure accurate and efficient planning and operations management.",
     },
     {
       id: 3,
@@ -189,8 +190,9 @@ function HomeCards() {
     {
       id: 4,
       imgUrl: CapacityWarehouse,
-      title: "Warehouse Conceptual Design",
-      description: "PlaceHolder",
+      title: "Logistic Facility Designer",
+      description:
+        "A warehouse design tool helps fast-growing companies to build facility profiles - operational areas, sizing, storage technology, material handling equipment, investments and costs, with 50 years of Miebach know-how in facility design. Client can use this customizable and configurable app to assess different design alternatives in a self-service, agile and scalable manner.",
     },
     {
       id: 5,
@@ -201,8 +203,9 @@ function HomeCards() {
     {
       id: 6,
       imgUrl: PowerDemand,
-      title: "Demand forecast",
-      description: "PlaceHolder",
+      title: "Forecast Tool",
+      description:
+        "The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.",
     },
     {
       id: 7,
@@ -220,11 +223,13 @@ function HomeCards() {
       id: 9,
       imgUrl: CostNetwork,
       title: "Network Cost to Serve and Flow Optimization",
+      description: "PlaceHolder",
     },
     {
       id: 10,
       imgUrl: CostOperational,
       title: "Operational Cost to Serve and Flow Optimization",
+      description: "PlaceHolder",
     },
   ];
 
@@ -239,7 +244,7 @@ function HomeCards() {
           <CardContent>
             <CardsBG imgUrl={card.imgUrl} />
             <CardTitle isHovered={hoverStatus[card.id]}>{card.title}</CardTitle>
-            <div style={{ position: "absolute", bottom: 10 }}>
+            <CardDetails>
               <CardDescription isHovered={hoverStatus[card.id]}>
                 {card.description}
               </CardDescription>
@@ -247,7 +252,7 @@ function HomeCards() {
                 <DemoButton>See Demo</DemoButton>
                 <OpenButton>Open</OpenButton>
               </ButtonGroup>
-            </div>
+            </CardDetails>
           </CardContent>
         </Card>
       ))}

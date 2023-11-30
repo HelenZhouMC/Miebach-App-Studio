@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import CostNetwork from "../images/CostNetwork.jpg";
+import CostNetwork from "../images/CostNetwork.png";
 import CostOperational from "../images/CostOperational.jpg";
 import withPageTransition from "../hooks/withPageTransition";
 
