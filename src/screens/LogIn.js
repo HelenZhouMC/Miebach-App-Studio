@@ -78,7 +78,7 @@ const EnterButton = styled(Link)`
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 2% 5%;
+  padding: 3% 5%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
