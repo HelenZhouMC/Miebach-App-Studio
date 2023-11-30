@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
-import CostNetwork from "../images/CostNetwork.png";
-import CostOperational from "../images/CostOperational.jpg";
+import CostNetworkL from "../images/CostNetworkL.png";
+import CostNetworkR from "../images/CostNetworkR.png";
+import CostOperationalL from "../images/CostOperationalL.jpg";
+import CostOperationalR from "../images/CostOperationalR.jpg";
 import withPageTransition from "../hooks/withPageTransition";
 
 const CardsContainer = styled.div`
   position: relative;
+  width: 100%;
   display: flex;
-  margin-top: -50px;
-  padding: 16px 48px;
+  margin-top: -5vh;
+  padding: 1% 1.5% 1% 2%;
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
@@ -22,10 +25,10 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
-  gap: 28px;
+  gap: 5%;
   align-self: stretch;
   border-radius: 16px;
-  margin-left: 30px;
+  margin-left: 3%;
 `;
 const slideInUp = keyframes`
   from {
@@ -76,8 +79,8 @@ const DetailContainer = styled.div`
   position: relative;
   align-self: stretch;
   border-radius: 16px;
-  margin-right: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-right: 3%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   &::before {
     content: "";
     position: absolute;
@@ -104,7 +107,7 @@ const Detail = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -112,7 +115,7 @@ const Detail = styled.div`
   img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
   }
 `;
 const TextOverlay = styled.div`
@@ -127,28 +130,25 @@ const TextOverlay = styled.div`
 `;
 const SelectedTitle = styled.div`
   color: #fff;
-  font-size: 24px;
+  font-size: calc(20px + 20%);
   font-style: normal;
   font-weight: 600;
-  line-height: 30px;
 `;
 const SelectedDescription = styled.div`
   color: #fff;
-  width: 50%;
-  font-size: 16px;
+  width: 60%;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 300;
-  line-height: 20px;
-  margin-top: 10px;
+  margin-top: 5%;
 `;
 const ButtonGroup = styled.div`
   display: flex;
 `;
 const DemoButton = styled(Link)`
   display: flex;
-  height: 30px;
-  width: 23%;
-  padding: 6px 14px;
+  width: 25%;
+  padding: 1% 2%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -158,17 +158,15 @@ const DemoButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
-  margin-right: 10px;
+  margin-right: 1%;
 `;
 const OpenButton = styled(Link)`
   display: flex;
-  height: 30px;
-  width: 23%;
-  padding: 6px 14px;
+  width: 25%;
+  padding: 1% 2%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -178,18 +176,16 @@ const OpenButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
-  margin-left: 10px;
+  margin-left: 1%;
 `;
-
 const CardContent = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 45%;
+  width: 47.5%;
   border-radius: 16px;
   cursor: pointer;
 `;
@@ -198,7 +194,7 @@ const Image = styled.div`
   height: 60vh;
   object-fit: cover;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 4;
   &:hover {
     border: 1px solid #9f2733;
@@ -216,20 +212,20 @@ const CardTitle = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 24px 8px;
+  padding: 1% 2%;
   color: #fff;
   text-align: center;
-  font-size: 16px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 700;
-  line-height: 20px;
   z-index: 5;
 `;
 
 function CostCards() {
   const [selectedImage, setSelectedImage] = useState({
     id: 1,
-    src: CostNetwork,
+    srcL: CostNetworkL,
+    srcR: CostNetworkR,
     title: `Network Cost to Serve and Flow Optimization`,
     description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
   });
@@ -257,7 +253,7 @@ function CostCards() {
           animationPhase={animationPhase}
         >
           <Detail>
-            <img src={previousImage.src} alt="selected card"></img>
+            <img src={previousImage.srcL} alt="selected card"></img>
             <TextOverlay>
               <SelectedTitle>
                 {previousImage.title}
@@ -279,7 +275,7 @@ function CostCards() {
           animationPhase={animationPhase}
         >
           <Detail>
-            <img src={selectedImage.src} alt="selected card"></img>
+            <img src={selectedImage.srcL} alt="selected card"></img>
             <TextOverlay>
               <SelectedTitle>
                 {selectedImage.title}
@@ -299,11 +295,12 @@ function CostCards() {
         <CardContent>
           <Image
             key={1}
-            src={CostNetwork}
+            src={CostNetworkR}
             onClick={() =>
               selectImage({
                 id: 1,
-                src: CostNetwork,
+                srcL: CostNetworkL,
+                srcR: CostNetworkR,
                 title: `Network Cost to Serve and Flow Optimization`,
                 description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
               })
@@ -315,11 +312,12 @@ function CostCards() {
         <CardContent>
           <Image
             key={2}
-            src={CostOperational}
+            src={CostOperationalR}
             onClick={() =>
               selectImage({
                 id: 2,
-                src: CostOperational,
+                srcL: CostOperationalL,
+                srcR: CostNetworkR,
                 title: `Operational Cost to Serve and Flow Optimization`,
                 description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
               })
