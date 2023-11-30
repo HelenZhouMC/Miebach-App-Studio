@@ -133,6 +133,9 @@ const SelectedTitle = styled.div`
   font-size: calc(20px + 20%);
   font-style: normal;
   font-weight: 600;
+  max-height: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const SelectedDescription = styled.div`
   color: #fff;

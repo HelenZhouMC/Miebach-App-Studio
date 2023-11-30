@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import PowerDemand from "../images/PowerDemand.jpg";
-import PowerPredictive from "../images/PowerPredictive.jpg";
-import PowerRoot from "../images/PowerRoot.jpg";
+import PowerDemandL from "../images/PowerDemandL.jpg";
+import PowerDemandR from "../images/PowerDemandR.jpg";
+import PowerPredictiveL from "../images/PowerPredictiveL.jpg";
+import PowerPredictiveR from "../images/PowerPredictiveR.jpg";
+import PowerRootL from "../images/PowerRootL.jpg";
+import PowerRootR from "../images/PowerRootR.jpg";
 import withPageTransition from "../hooks/withPageTransition";
 
 const CardsContainer = styled.div`
   position: relative;
+  width: 100%;
   display: flex;
-  margin-top: -50px;
-  padding: 16px 48px;
+  margin-top: -5vh;
+  padding: 1% 1.5% 1% 2%;
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
@@ -20,13 +23,14 @@ const CardsContainer = styled.div`
 `;
 const ImageContainer = styled.div`
   flex: 1;
+  height: 60vh;
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
-  gap: 28px;
+  gap: 5%;
   align-self: stretch;
   border-radius: 16px;
-  margin-left: 30px;
+  margin-left: 3%;
 `;
 const DetailContainer = styled.div`
   flex: 1;
@@ -37,8 +41,8 @@ const DetailContainer = styled.div`
   position: relative;
   align-self: stretch;
   border-radius: 16px;
-  margin-right: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-right: 3%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   &::before {
     content: "";
     position: absolute;
@@ -104,6 +108,7 @@ const Detail = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -111,7 +116,7 @@ const Detail = styled.div`
   img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
   }
 `;
 const TextOverlay = styled.div`
@@ -126,28 +131,28 @@ const TextOverlay = styled.div`
 `;
 const SelectedTitle = styled.div`
   color: #fff;
-  font-size: 24px;
+  font-size: calc(20px + 20%);
   font-style: normal;
   font-weight: 600;
-  line-height: 30px;
+  max-height: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const SelectedDescription = styled.div`
   color: #fff;
-  width: 50%;
-  font-size: 16px;
+  width: 60%;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 300;
-  line-height: 20px;
-  margin-top: 10px;
+  margin-top: 5%;
 `;
 const ButtonGroup = styled.div`
   display: flex;
 `;
 const DemoButton = styled(Link)`
   display: flex;
-  height: 30px;
-  width: 23%;
-  padding: 6px 14px;
+  width: 25%;
+  padding: 1% 2%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -157,17 +162,15 @@ const DemoButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
-  margin-right: 10px;
+  margin-right: 1%;
 `;
 const OpenButton = styled(Link)`
   display: flex;
-  height: 30px;
-  width: 23%;
-  padding: 6px 14px;
+  width: 25%;
+  padding: 1% 2%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -177,11 +180,10 @@ const OpenButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
-  margin-left: 10px;
+  margin-left: 1%;
 `;
 const CardContent = styled.div`
   position: relative;
@@ -196,7 +198,7 @@ const Image = styled.div`
   width: 100%;
   object-fit: cover;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 4;
   &:hover {
     border: 1px solid #9f2733;
@@ -214,20 +216,20 @@ const CardTitle = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 24px 8px;
+  padding: 1% 2%;
   color: #fff;
   text-align: center;
-  font-size: 16px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 700;
-  line-height: 20px;
   z-index: 5;
 `;
 
 function PowerCards() {
   const [selectedImage, setSelectedImage] = useState({
     id: 1,
-    src: PowerDemand,
+    srcL: PowerDemandL,
+    srcR: PowerDemandR,
     title: `Forecast Tool`,
     description: `The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
   });
@@ -254,7 +256,7 @@ function PowerCards() {
           animationPhase={animationPhase}
         >
           <Detail>
-            <img src={previousImage.src} alt="selected card"></img>
+            <img src={previousImage.srcL} alt="selected card"></img>
             <TextOverlay>
               <SelectedTitle>
                 {previousImage.title}
@@ -276,7 +278,7 @@ function PowerCards() {
           animationPhase={animationPhase}
         >
           <Detail>
-            <img src={selectedImage.src} alt="selected card"></img>
+            <img src={selectedImage.srcL} alt="selected card"></img>
             <TextOverlay>
               <SelectedTitle>
                 {selectedImage.title}
@@ -296,11 +298,12 @@ function PowerCards() {
         <CardContent>
           <Image
             key={1}
-            src={PowerDemand}
+            src={PowerDemandR}
             onClick={() =>
               selectImage({
                 id: 1,
-                src: PowerDemand,
+                srcL: PowerDemandL,
+                srcR: PowerDemandR,
                 title: `Forecast Tool`,
                 description: `The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
               })
@@ -312,11 +315,12 @@ function PowerCards() {
         <CardContent>
           <Image
             key={2}
-            src={PowerPredictive}
+            src={PowerPredictiveR}
             onClick={() =>
               selectImage({
                 id: 2,
-                src: PowerPredictive,
+                srcL: PowerPredictiveL,
+                srcR: PowerPredictiveR,
                 title: `Predictive Data Models`,
                 description: `![No Data, placeholder only]`,
               })
@@ -328,11 +332,12 @@ function PowerCards() {
         <CardContent>
           <Image
             key={3}
-            src={PowerRoot}
+            src={PowerRootR}
             onClick={() =>
               selectImage({
                 id: 3,
-                src: PowerRoot,
+                srcL: PowerRootL,
+                srcR: PowerRootR,
                 title: `Root Cause Detector`,
                 description: `![No Data, placeholder only]`,
               })

@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import CapacityControl from "../images/CapacityControl.jpg";
-import CapacityOperational from "../images/CapacityOperational.jpg";
-import CapacityStrategic from "../images/CapacityStrategic.jpg";
-import CapacityTactical from "../images/CapacityTactical.jpg";
-import CapacityWarehouse from "../images/CapacityWarehouse.jpg";
+import CapacityControlL from "../images/CapacityControlL.jpg";
+import CapacityOperationalL from "../images/CapacityOperationalL.jpg";
+import CapacityStrategicL from "../images/CapacityStrategicL.jpg";
+import CapacityTacticalL from "../images/CapacityTacticalL.jpg";
+import CapacityWarehouseL from "../images/CapacityWarehouseL.jpg";
+import CapacityControlR from "../images/CapacityControlR.jpg";
+import CapacityOperationalR from "../images/CapacityOperationalR.jpg";
+import CapacityStrategicR from "../images/CapacityStrategicR.jpg";
+import CapacityTacticalR from "../images/CapacityTacticalR.jpg";
+import CapacityWarehouseR from "../images/CapacityWarehouseR.jpg";
 import withPageTransition from "../hooks/withPageTransition";
 
 const CardsContainer = styled.div`
   position: relative;
+  width: 100%;
   display: flex;
-  margin-top: -50px;
-  padding: 16px 48px;
+  margin-top: -5vh;
+  padding: 1% 1.5% 1% 2%;
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
@@ -70,7 +75,7 @@ const DetailContainer = styled.div`
   position: relative;
   align-self: stretch;
   border-radius: 16px;
-  margin-right: 30px;
+  margin-right: 3%;
   border: 1px solid rgba(255, 255, 255, 0.3);
   &::before {
     content: "";
@@ -97,6 +102,7 @@ const Detail = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -104,7 +110,7 @@ const Detail = styled.div`
   img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
   }
 `;
 const TextOverlay = styled.div`
@@ -119,28 +125,28 @@ const TextOverlay = styled.div`
 `;
 const SelectedTitle = styled.div`
   color: #fff;
-  font-size: 24px;
+  font-size: calc(20px + 20%);
   font-style: normal;
   font-weight: 600;
-  line-height: 30px;
+  max-height: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const SelectedDescription = styled.div`
   color: #fff;
-  width: 50%;
-  font-size: 16px;
+  width: 60%;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 300;
-  line-height: 20px;
-  margin-top: 10px;
+  margin-top: 5%;
 `;
 const ButtonGroup = styled.div`
   display: flex;
 `;
 const DemoButton = styled(Link)`
   display: flex;
-  height: 30px;
-  width: 23%;
-  padding: 6px 14px;
+  width: 25%;
+  padding: 1% 2%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -150,17 +156,15 @@ const DemoButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
-  margin-right: 10px;
+  margin-right: 1%;
 `;
 const OpenButton = styled(Link)`
   display: flex;
-  height: 30px;
-  width: 23%;
-  padding: 6px 14px;
+  width: 25%;
+  padding: 1% 2%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -170,18 +174,16 @@ const OpenButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
-  margin-left: 10px;
+  margin-left: 1%;
 `;
-
 const ImageContainer = styled.div`
   flex: 1;
   height: 60vh;
   border-radius: 16px;
-  margin-left: 30px;
+  margin-left: 3%;
 `;
 const RowBox = styled.div`
   display: flex;
@@ -245,10 +247,9 @@ const FirstArrow = styled.div`
   overflow: hidden;
   color: #fff;
   text-align: center;
-  font-size: 20px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
   z-index: 5;
 `;
 const TacticalDiv = styled.div`
@@ -294,10 +295,9 @@ const SecondArrow = styled.div`
   overflow: hidden;
   color: #fff;
   text-align: center;
-  font-size: 20px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 700;
-  line-height: 24px;
   z-index: 5;
 `;
 const WarehouseDiv = styled.div`
@@ -317,7 +317,7 @@ const WarehouseImage = styled.div`
   height: 100%;
   object-fit: cover;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 4;
   &:hover {
     border: 1px solid #9f2733;
@@ -328,7 +328,7 @@ const WarehouseImage = styled.div`
       #141c1b 60%
     ),
     url(${(props) => props.src}), lightgray 50% / cover no-repeat;
-  background-size: cover;
+  background-size: fill;
 `;
 const SecondRow = styled.div`
   flex: 2;
@@ -354,7 +354,7 @@ const Image = styled.div`
   width: 100%;
   object-fit: cover;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 4;
   &:hover {
     border: 1px solid #9f2733;
@@ -373,20 +373,20 @@ const CardTitle = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 1% 2%;
   color: #fff;
   text-align: center;
-  font-size: 16px;
+  font-size: calc(14px + 10%);
   font-style: normal;
   font-weight: 700;
-  line-height: 20px;
   z-index: 5;
-  padding: 8px;
 `;
 
 function CapacityCards() {
   const [selectedImage, setSelectedImage] = useState({
     id: 1,
-    src: CapacityStrategic,
+    srcL: CapacityStrategicL,
+    srcR: CapacityStrategicR,
     title: `Facility Planner`,
     description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
   });
@@ -413,7 +413,7 @@ function CapacityCards() {
           animationPhase={animationPhase}
         >
           <Detail>
-            <img src={previousImage.src} alt="selected card"></img>
+            <img src={previousImage.srcL} alt="selected card"></img>
             <TextOverlay>
               <SelectedTitle>
                 {previousImage.title}
@@ -435,7 +435,7 @@ function CapacityCards() {
           animationPhase={animationPhase}
         >
           <Detail>
-            <img src={selectedImage.src} alt="selected card"></img>
+            <img src={selectedImage.srcL} alt="selected card"></img>
             <TextOverlay>
               <SelectedTitle>
                 {selectedImage.title}
@@ -458,11 +458,12 @@ function CapacityCards() {
               <CardContent>
                 <Image
                   key={1}
-                  src={CapacityStrategic}
+                  src={CapacityStrategicR}
                   onClick={() =>
                     selectImage({
                       id: 1,
-                      src: CapacityStrategic,
+                      srcL: CapacityStrategicL,
+                      srcR: CapacityStrategicR,
                       title: `Facility Planner`,
                       description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
                     })
@@ -480,11 +481,12 @@ function CapacityCards() {
                     <CardContent>
                       <Image
                         key={2}
-                        src={CapacityTactical}
+                        src={CapacityTacticalR}
                         onClick={() =>
                           selectImage({
                             id: 2,
-                            src: CapacityTactical,
+                            srcL: CapacityTacticalL,
+                            srcR: CapacityTacticalR,
                             title: `Seasonal DC Planner`,
                             description: `A tactical planning tool facilitates visibility, foresight, and capacity planning capabilities. It allows for dynamic system configuration updates, improves master data management, and offers support for routing, housekeeping and returns activities to ensure accurate and efficient planning and operations management.`,
                           })
@@ -501,11 +503,12 @@ function CapacityCards() {
                     <CardContent>
                       <Image
                         key={3}
-                        src={CapacityOperational}
+                        src={CapacityOperationalR}
                         onClick={() =>
                           selectImage({
                             id: 3,
-                            src: CapacityOperational,
+                            srcL: CapacityOperationalL,
+                            srcR: CapacityOperationalR,
                             title: `Operational Planning`,
                             description: `![No Data, placeholder only]`,
                           })
@@ -523,11 +526,12 @@ function CapacityCards() {
                   <CardContent>
                     <WarehouseImage
                       key={4}
-                      src={CapacityWarehouse}
+                      src={CapacityWarehouseR}
                       onClick={() =>
                         selectImage({
                           id: 4,
-                          src: CapacityWarehouse,
+                          srcL: CapacityWarehouseL,
+                          srcR: CapacityWarehouseR,
                           title: `Logistic Facility Designer`,
                           description: `A warehouse design tool helps fast-growing companies to build facility profiles - operational areas, sizing, storage technology, material handling equipment, investments and costs, with 50 years of Miebach know-how in facility design. Client can use this customizable and configurable app to assess different design alternatives in a self-service, agile and scalable manner.`,
                         })
@@ -544,11 +548,12 @@ function CapacityCards() {
             <CardContent>
               <Image
                 key={5}
-                src={CapacityControl}
+                src={CapacityControlR}
                 onClick={() =>
                   selectImage({
                     id: 5,
-                    src: CapacityControl,
+                    srcL: CapacityControlL,
+                    srcR: CapacityControlR,
                     title: `Control Tower`,
                     description: `![No Data, placeholder only]`,
                   })
