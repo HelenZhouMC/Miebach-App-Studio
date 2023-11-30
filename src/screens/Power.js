@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import header from "../images/HeaderBG.png";
 import PowerCards from "../components/PowerCards";
 
 const Background = styled.div`
   background-color: #141c1b;
-  min-width: 100vh;
+  min-width: 100vw;
   min-height: 100vh;
-  padding: 16px 22px;
+  padding: 1em 1.5em;
+  @media (max-width: 768px) {
+    padding: 1em;
+  }
 `;
 const Header = styled.div`
   display: flex;
-  height: 168px;
+  width: 100%;
+  height: 20vh;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
   flex: 1 0 0;
   border-radius: 16px;
   background: linear-gradient(
@@ -31,8 +33,7 @@ const Header = styled.div`
 `;
 const NaviBar = styled.div`
   display: flex;
-  height: 48px;
-  padding: 30px 16px;
+  padding: 2% 3%;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
@@ -44,43 +45,41 @@ const Logo = styled.div`
   display: flex;
 `;
 const Miebach = styled.div`
-  color: white;
+  color: #fff;
   font-weight: 500;
-  font-size: 20px;
+  font-size: calc(20px + 10%);
 `;
 const Digital = styled.div`
-  color: orange;
+  color: #db3e03;
   font-weight: 250;
-  font-size: 20px;
+  font-size: calc(20px + 10%);
 `;
 const TaskBar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 48px;
+  gap: 2%;
   flex: 1 0 0;
 `;
 const Task = styled(Link)`
   color: #fff;
   text-align: center;
-  font-size: 13px;
+  font-size: calc(12px + 5%);
   font-style: normal;
   font-weight: 400;
   text-decoration: none;
 `;
 const LogOut = styled.div`
   display: flex;
-  width: 115px;
   justify-content: flex-end;
   align-items: center;
 `;
 const Title = styled.div`
   color: #fff;
-  font-size: 30px;
+  font-size: calc(28px + 10%);
   font-style: normal;
   font-weight: 500;
-  line-height: 32px;
-  padding-left: 16px;
+  padding-left: 3%;
   z-index: 2;
 `;
 
@@ -117,7 +116,7 @@ function Power() {
             <Link to="/login">
               <i
                 className="bi bi-box-arrow-right"
-                style={{ color: "white" }}
+                style={{ color: "white", fontSize: "100%" }}
               ></i>
             </Link>
           </LogOut>
