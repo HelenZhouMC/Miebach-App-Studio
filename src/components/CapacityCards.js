@@ -387,17 +387,8 @@ function CapacityCards() {
   const [selectedImage, setSelectedImage] = useState({
     id: 1,
     src: CapacityStrategic,
-    title: `Strategic capacity management`,
-    description: `As the client's business expands, a
-    strategic capacity planning tool
-    becomes crucial. It offers visibility
-    into future growth impacts and
-    helps prepare for challenges such as
-    capacity constraints, supply chain
-    disruptions, and resource shortages.
-    This tool enables proactive
-    measures to effectively address
-    these challenges.`,
+    title: `Facility Planner`,
+    description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
   });
   const [previousImage, setPreviousImage] = useState(null);
   const [animationPhase, setAnimationPhase] = useState("in");
@@ -472,22 +463,13 @@ function CapacityCards() {
                     selectImage({
                       id: 1,
                       src: CapacityStrategic,
-                      title: `Strategic capacity management`,
-                      description: `As the client's business expands, a
-                  strategic capacity planning tool
-                  becomes crucial. It offers visibility
-                  into future growth impacts and
-                  helps prepare for challenges such as
-                  capacity constraints, supply chain
-                  disruptions, and resource shortages.
-                  This tool enables proactive
-                  measures to effectively address
-                  these challenges.`,
+                      title: `Facility Planner`,
+                      description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
                     })
                   }
                   selected={selectedImage?.id === 1}
                 ></Image>
-                <CardTitle>Strategic capacity management</CardTitle>
+                <CardTitle>Facility Planner</CardTitle>
               </CardContent>
             </LeftTop>
             <RightTop>
@@ -503,22 +485,13 @@ function CapacityCards() {
                           selectImage({
                             id: 2,
                             src: CapacityTactical,
-                            title: `Tactical capacity planning`,
-                            description: `![No Data, placeholder only]As the client's business expands, a
-                  strategic capacity planning tool
-                  becomes crucial. It offers visibility
-                  into future growth impacts and
-                  helps prepare for challenges such as
-                  capacity constraints, supply chain
-                  disruptions, and resource shortages.
-                  This tool enables proactive
-                  measures to effectively address
-                  these challenges.`,
+                            title: `Seasonal DC Planner`,
+                            description: `A tactical planning tool facilitates visibility, foresight, and capacity planning capabilities. It allows for dynamic system configuration updates, improves master data management, and offers support for routing, housekeeping and returns activities to ensure accurate and efficient planning and operations management.`,
                           })
                         }
                         selected={selectedImage?.id === 2}
                       ></Image>
-                      <CardTitle>Tactical capacity planning</CardTitle>
+                      <CardTitle>Seasonal DC Planner</CardTitle>
                     </CardContent>
                   </TacticalDiv>
                 </TacticalBox>
@@ -534,16 +507,7 @@ function CapacityCards() {
                             id: 3,
                             src: CapacityOperational,
                             title: `Operational planning`,
-                            description: `![No Data, placeholder only]As the client's business expands, a
-                  strategic capacity planning tool
-                  becomes crucial. It offers visibility
-                  into future growth impacts and
-                  helps prepare for challenges such as
-                  capacity constraints, supply chain
-                  disruptions, and resource shortages.
-                  This tool enables proactive
-                  measures to effectively address
-                  these challenges.`,
+                            description: `![No Data, placeholder only]`,
                           })
                         }
                         selected={selectedImage?.id === 3}
@@ -564,22 +528,13 @@ function CapacityCards() {
                         selectImage({
                           id: 4,
                           src: CapacityWarehouse,
-                          title: `Warehouse Conceptual Design`,
-                          description: `![No Data, placeholder only]As the client's business expands, a
-                  strategic capacity planning tool
-                  becomes crucial. It offers visibility
-                  into future growth impacts and
-                  helps prepare for challenges such as
-                  capacity constraints, supply chain
-                  disruptions, and resource shortages.
-                  This tool enables proactive
-                  measures to effectively address
-                  these challenges.`,
+                          title: `Logistic Facility Designer`,
+                          description: `A warehouse design tool helps fast-growing companies to build facility profiles - operational areas, sizing, storage technology, material handling equipment, investments and costs, with 50 years of Miebach know-how in facility design. Client can use this customizable and configurable app to assess different design alternatives in a self-service, agile and scalable manner.`,
                         })
                       }
                       selected={selectedImage?.id === 4}
                     ></WarehouseImage>
-                    <CardTitle>Warehouse Conceptual Design</CardTitle>
+                    <CardTitle>Logistic Facility Designer</CardTitle>
                   </CardContent>
                 </WarehouseDiv>
               </SubRightBottom>
@@ -595,16 +550,7 @@ function CapacityCards() {
                     id: 5,
                     src: CapacityControl,
                     title: `Control tower`,
-                    description: `![No Data, placeholder only]As the client's business expands, a
-                  strategic capacity planning tool
-                  becomes crucial. It offers visibility
-                  into future growth impacts and
-                  helps prepare for challenges such as
-                  capacity constraints, supply chain
-                  disruptions, and resource shortages.
-                  This tool enables proactive
-                  measures to effectively address
-                  these challenges.`,
+                    description: `![No Data, placeholder only]`,
                   })
                 }
                 selected={selectedImage?.id === 5}

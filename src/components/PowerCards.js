@@ -228,8 +228,8 @@ function PowerCards() {
   const [selectedImage, setSelectedImage] = useState({
     id: 1,
     src: PowerDemand,
-    title: `Demand forecast`,
-    description: `The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+    title: `Forecast Tool`,
+    description: `The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
   });
   const [previousImage, setPreviousImage] = useState(null);
   const [animationPhase, setAnimationPhase] = useState("in");
@@ -301,13 +301,13 @@ function PowerCards() {
               selectImage({
                 id: 1,
                 src: PowerDemand,
-                title: `Demand forecast`,
-                description: `The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+                title: `Forecast Tool`,
+                description: `The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
               })
             }
             selected={selectedImage?.id === 1}
           ></Image>
-          <CardTitle>Demand forecast</CardTitle>
+          <CardTitle>Forecast Tool</CardTitle>
         </CardContent>
         <CardContent>
           <Image
@@ -318,7 +318,7 @@ function PowerCards() {
                 id: 2,
                 src: PowerPredictive,
                 title: `Predictive data models`,
-                description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+                description: `![No Data, placeholder only]`,
               })
             }
             selected={selectedImage?.id === 2}
@@ -334,7 +334,7 @@ function PowerCards() {
                 id: 3,
                 src: PowerRoot,
                 title: `Root cause detector`,
-                description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+                description: `![No Data, placeholder only]`,
               })
             }
             selected={selectedImage?.id === 3}
