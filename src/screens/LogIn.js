@@ -17,14 +17,12 @@ const Background = styled.div`
 `;
 const LoginDiv = styled.div`
   display: flex;
-  width: 615px;
-  height: 296px;
-  padding: 24px;
+  width: 40vw;
+  min-width: 300px;
+  padding: 2%;
   justify-content: flex-end;
   align-items: flex-start;
-  gap: 4px;
   border-radius: 16px;
-  border: 1px solid black;
   background: linear-gradient(
       180deg,
       rgba(20, 28, 27, 0.8) 0%,
@@ -33,49 +31,43 @@ const LoginDiv = styled.div`
     url(${header}), lightgray 50% / cover no-repeat;
   background-position: center;
   background-size: cover;
-  background-size: cover;
 `;
 const Logo = styled.div`
   display: flex;
-  padding: 4px 16px;
+  padding: 1% 2%;
   align-items: center;
-  gap: 4px;
   flex: 1 0 0;
   img {
-    width: 60%;
+    width: 70%;
     filter: brightness(0) invert(1);
   }
 `;
 const LoginForm = styled.div`
   display: flex;
-  width: 275px;
-  padding: 24px;
+  width: 100%;
+  padding: 10%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
   flex-shrink: 0;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid #fff;
   background: var(--colours-light-gray, #f2f2f2);
 `;
 const InputBox = styled.input`
   display: flex;
-  padding: 8px;
+  padding: 2%;
   align-items: flex-start;
-  gap: 4px;
   align-self: stretch;
   border-radius: 8px;
   border: 1px #fff solid;
   background: #fff;
-  height: 33px;
+  width: 100%;
 `;
 const TitleBox = styled.div`
   color: var(--colours-dark, #141c1b);
-  font-size: 12px;
+  font-size: calc(12px + 6%);
   font-style: normal;
   font-weight: 400;
-  line-height: 16px;
 `;
 const CenteredDiv = styled.div`
   display: flex;
@@ -85,21 +77,19 @@ const CenteredDiv = styled.div`
 const EnterButton = styled(Link)`
   display: flex;
   width: 100%;
-  height: 36px;
-  padding: 6px 14px;
+  height: 100%;
+  padding: 2% 5%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid #fff;
   background: linear-gradient(180deg, #e73f00 0%, #e70098 100%);
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 12px;
+  font-size: calc(12px + 6%);
   font-style: normal;
   font-weight: 500;
-  line-height: 16px;
 `;
 
 function LogIn() {
