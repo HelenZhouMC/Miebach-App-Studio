@@ -506,13 +506,13 @@ function CapacityCards() {
                           selectImage({
                             id: 3,
                             src: CapacityOperational,
-                            title: `Operational planning`,
+                            title: `Operational Planning`,
                             description: `![No Data, placeholder only]`,
                           })
                         }
                         selected={selectedImage?.id === 3}
                       ></Image>
-                      <CardTitle>Operational planning</CardTitle>
+                      <CardTitle>Operational Planning</CardTitle>
                     </CardContent>
                   </OperationalDiv>
                 </OperationalBox>
@@ -549,13 +549,13 @@ function CapacityCards() {
                   selectImage({
                     id: 5,
                     src: CapacityControl,
-                    title: `Control tower`,
+                    title: `Control Tower`,
                     description: `![No Data, placeholder only]`,
                   })
                 }
                 selected={selectedImage?.id === 5}
               ></Image>
-              <CardTitle>Control tower</CardTitle>
+              <CardTitle>Control Tower</CardTitle>
             </CardContent>
           </SecondRow>
         </RowBox>

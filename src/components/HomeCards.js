@@ -16,13 +16,12 @@ import CostOperational from "../images/CostOperational.jpg";
 const CardsContainer = styled.div`
   display: flex;
   width: 100%;
-  margin-top: -50px;
-  padding: 16px 22px;
+  margin-top: -5vh;
+  padding: 0% 0% 0% 4%;
   align-items: flex-start;
   align-content: flex-start;
   gap: 4%;
   flex-wrap: wrap;
-  border-radius: 16px;
 `;
 const CardsBG = styled.div`
   width: 100%;
@@ -38,21 +37,43 @@ const CardsBG = styled.div`
 `;
 const Card = styled.div`
   display: flex;
-  width: calc(25% - 4%);
-  padding-top: calc(25% - 4%);
+  width: calc(100% - 4%);
+  padding-top: calc(100% - 4%);
   margin-bottom: 4%;
   justify-content: center;
   align-items: center;
   position: relative;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
   z-index: 3;
   &:hover {
     cursor: pointer;
     ${CardsBG} {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 16px;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+      z-index: 4;
+    }
+  }
+  @media (min-width: 600px) {
+    width: calc(50% - 4%);
+    padding-top: calc(50% - 4%);
+  }
+
+  @media (min-width: 1024px) {
+    width: calc(25% - 4%);
+    padding-top: calc(25% - 4%);
   }
 `;
 const CardContent = styled.div`
@@ -74,16 +95,15 @@ const CardContent = styled.div`
 `;
 const CardTitle = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 5%;
   left: 0;
   right: 0;
   color: #fff;
   text-align: center;
-  font-size: 16px;
+  font-size: calc(12px + 30%);
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  z-index: 5;
+  z-index: 8;
   transition: opacity 0.3s, transform 0.3s;
   opacity: ${(props) => (props.isHovered ? 0 : 1)};
   transform: translateY(${(props) => (props.isHovered ? "-100%" : "0")});
@@ -91,30 +111,32 @@ const CardTitle = styled.div`
 `;
 const CardDetails = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 3%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
+  z-index: 8;
 `;
 const CardDescription = styled.p`
   color: #fff;
-  font-size: 14px;
+  font-size: calc(12px + 20%);
   font-style: normal;
   font-weight: 400;
-  line-height: 16px;
-  margin-bottom: 20%;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding: 10% 5% 1% 5%;
   text-align: justify;
   transition: opacity 0.3s, transform 0.3s;
   opacity: ${(props) => (props.isHovered ? 1 : 0)};
   transform: translateY(${(props) => (props.isHovered ? "0" : "100%")});
   visibility: ${(props) => (props.isHovered ? "visible" : "hidden")};
+  max-height: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding-right: 10%;
+  padding-right: 5%;
   transition: opacity 0.3s, transform 0.3s;
   opacity: ${(props) => (props.isHovered ? 1 : 0)};
   transform: translateY(${(props) => (props.isHovered ? "0" : "100%")});
@@ -122,7 +144,7 @@ const ButtonGroup = styled.div`
 `;
 const DemoButton = styled(Link)`
   display: flex;
-  padding: 6px 14px;
+  padding: 1% 3%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -132,15 +154,14 @@ const DemoButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 12px;
+  font-size: calc(14px + 5%);
   font-style: normal;
-  font-weight: 500;
-  line-height: 14px;
-  margin-right: 10px;
+  font-weight: 400;
+  margin-right: 2%;
 `;
 const OpenButton = styled(Link)`
   display: flex;
-  padding: 6px 14px;
+  padding: 1% 3%;
   justify-content: center;
   align-items: center;
   align-self: stretch;
@@ -150,11 +171,10 @@ const OpenButton = styled(Link)`
   color: #fff;
   text-decoration: none;
   text-align: center;
-  font-size: 12px;
+  font-size: calc(14px + 5%);
   font-style: normal;
-  font-weight: 500;
-  line-height: 14px;
-  margin-left: 10px;
+  font-weight: 400;
+  margin-left: 2%;
 `;
 
 function HomeCards() {
@@ -184,7 +204,7 @@ function HomeCards() {
     {
       id: 3,
       imgUrl: CapacityOperational,
-      title: "Operational planning",
+      title: "Operational Planning",
       description: "PlaceHolder",
     },
     {
@@ -197,7 +217,7 @@ function HomeCards() {
     {
       id: 5,
       imgUrl: CapacityControl,
-      title: "Control tower",
+      title: "Control Tower",
       description: "PlaceHolder",
     },
     {
@@ -210,13 +230,13 @@ function HomeCards() {
     {
       id: 7,
       imgUrl: PowerPredictive,
-      title: "Predictive data models",
+      title: "Predictive Data Models",
       description: "PlaceHolder",
     },
     {
       id: 8,
       imgUrl: PowerRoot,
-      title: "Root cause detector",
+      title: "Root Cause Detector",
       description: "PlaceHolder",
     },
     {

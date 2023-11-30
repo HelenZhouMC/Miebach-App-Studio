@@ -33,7 +33,7 @@ const Header = styled.div`
 `;
 const NaviBar = styled.div`
   display: flex;
-  padding: 2% 3%;
+  padding: 1% 3%;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;

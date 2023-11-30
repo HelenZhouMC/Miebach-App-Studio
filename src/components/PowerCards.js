@@ -317,13 +317,13 @@ function PowerCards() {
               selectImage({
                 id: 2,
                 src: PowerPredictive,
-                title: `Predictive data models`,
+                title: `Predictive Data Models`,
                 description: `![No Data, placeholder only]`,
               })
             }
             selected={selectedImage?.id === 2}
           ></Image>
-          <CardTitle>Predictive data models</CardTitle>
+          <CardTitle>Predictive Data Models</CardTitle>
         </CardContent>
         <CardContent>
           <Image
@@ -333,7 +333,7 @@ function PowerCards() {
               selectImage({
                 id: 3,
                 src: PowerRoot,
-                title: `Root cause detector`,
+                title: `Root Cause Detector`,
                 description: `![No Data, placeholder only]`,
               })
             }
