@@ -166,7 +166,7 @@ const DemoButton = styled(Link)`
   font-weight: 500;
   margin-right: 1%;
 `;
-const OpenButton = styled(Link)`
+const OpenButton = styled.a`
   display: flex;
   width: 25%;
   padding: 1% 2%;
@@ -183,6 +183,7 @@ const OpenButton = styled(Link)`
   font-style: normal;
   font-weight: 500;
   margin-left: 1%;
+  cursor: pointer;
 `;
 const CardContent = styled.div`
   position: relative;
@@ -200,7 +201,10 @@ const Image = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 4;
   &:hover {
-    border: 1px solid #9f2733;
+    border: ${(props) =>
+      props.hasLink
+        ? "1px solid #9f2733"
+        : "1px solid rgba(255, 255, 255, 0.5)"};
   }
   background: radial-gradient(
       142.52% 126.57% at 2.83% 3.89%,
@@ -223,6 +227,15 @@ const CardTitle = styled.div`
   font-weight: 700;
   z-index: 5;
 `;
+const DisabledOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 5;
+`;
 
 function CostCards() {
   const [selectedImage, setSelectedImage] = useState({
@@ -230,7 +243,8 @@ function CostCards() {
     srcL: CostNetworkL,
     srcR: CostNetworkR,
     title: `Network Cost to Serve and Flow Optimization`,
-    description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+    description: "",
+    linkTo: "https://miebach-returnables.azurewebsites.net",
   });
 
   const [previousImage, setPreviousImage] = useState(null);
@@ -265,8 +279,14 @@ function CostCards() {
                 </SelectedDescription>
               </SelectedTitle>
               <ButtonGroup>
-                <DemoButton>See Demo</DemoButton>
-                <OpenButton>Open</OpenButton>
+                <DemoButton>See Details</DemoButton>
+                <OpenButton
+                  href={previousImage.linkTo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open
+                </OpenButton>
               </ButtonGroup>
             </TextOverlay>
           </Detail>
@@ -287,8 +307,14 @@ function CostCards() {
                 </SelectedDescription>
               </SelectedTitle>
               <ButtonGroup>
-                <DemoButton>See Demo</DemoButton>
-                <OpenButton>Open</OpenButton>
+                <DemoButton>See Details</DemoButton>
+                <OpenButton
+                  href={selectedImage.linkTo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open
+                </OpenButton>
               </ButtonGroup>
             </TextOverlay>
           </Detail>
@@ -305,10 +331,12 @@ function CostCards() {
                 srcL: CostNetworkL,
                 srcR: CostNetworkR,
                 title: `Network Cost to Serve and Flow Optimization`,
-                description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+                description: "",
+                linkTo: "https://miebach-returnables.azurewebsites.net",
               })
             }
             selected={selectedImage?.id === 1}
+            hasLink={true}
           ></Image>
           <CardTitle>Network Cost to Serve and Flow Optimization</CardTitle>
         </CardContent>
@@ -316,17 +344,20 @@ function CostCards() {
           <Image
             key={2}
             src={CostOperationalR}
-            onClick={() =>
+            /* onClick={() =>
               selectImage({
                 id: 2,
                 srcL: CostOperationalL,
                 srcR: CostNetworkR,
                 title: `Operational Cost to Serve and Flow Optimization`,
-                description: `![No Data, placeholder only]The Demand Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+                description: "",
               })
-            }
+            } */
             selected={selectedImage?.id === 2}
-          ></Image>
+            hasLink={false}
+          >
+            <DisabledOverlay />
+          </Image>
           <CardTitle>Operational Cost to Serve and Flow Optimization</CardTitle>
         </CardContent>
       </ImageContainer>

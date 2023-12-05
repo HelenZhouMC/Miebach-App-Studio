@@ -82,6 +82,14 @@ const Title = styled.div`
   padding-left: 3%;
   z-index: 2;
 `;
+const MyAccount = styled(Link)`
+  color: #fff;
+  text-align: center;
+  font-size: calc(12px + 5%);
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+`;
 
 function Capacity() {
   return (
@@ -113,6 +121,7 @@ function Capacity() {
             </Task>
           </TaskBar>
           <LogOut>
+            <MyAccount>My account&nbsp;&nbsp;</MyAccount>
             <Link to="/login">
               <i
                 className="bi bi-box-arrow-right"

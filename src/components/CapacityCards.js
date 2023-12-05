@@ -161,7 +161,7 @@ const DemoButton = styled(Link)`
   font-weight: 500;
   margin-right: 1%;
 `;
-const OpenButton = styled(Link)`
+const OpenButton = styled.a`
   display: flex;
   width: 25%;
   padding: 1% 2%;
@@ -178,6 +178,7 @@ const OpenButton = styled(Link)`
   font-style: normal;
   font-weight: 500;
   margin-left: 1%;
+  cursor: pointer;
 `;
 const ImageContainer = styled.div`
   flex: 1;
@@ -320,7 +321,10 @@ const WarehouseImage = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 4;
   &:hover {
-    border: 1px solid #9f2733;
+    border: ${(props) =>
+      props.hasLink
+        ? "1px solid #9f2733"
+        : "1px solid rgba(255, 255, 255, 0.5)"};
   }
   background: radial-gradient(
       142.52% 126.57% at 2.83% 3.89%,
@@ -357,7 +361,10 @@ const Image = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.5);
   z-index: 4;
   &:hover {
-    border: 1px solid #9f2733;
+    border: ${(props) =>
+      props.hasLink
+        ? "1px solid #9f2733"
+        : "1px solid rgba(255, 255, 255, 0.5)"};
   }
   background: radial-gradient(
       142.52% 126.57% at 2.83% 3.89%,
@@ -381,14 +388,24 @@ const CardTitle = styled.div`
   font-weight: 700;
   z-index: 5;
 `;
+const DisabledOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 5;
+`;
 
 function CapacityCards() {
   const [selectedImage, setSelectedImage] = useState({
     id: 1,
     srcL: CapacityStrategicL,
     srcR: CapacityStrategicR,
-    title: `Facility Planner`,
+    title: `Capacity Planner`,
     description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
+    linkTo: "https://miebach-capacity-tool.azurewebsites.net",
   });
   const [previousImage, setPreviousImage] = useState(null);
   const [animationPhase, setAnimationPhase] = useState("in");
@@ -422,8 +439,14 @@ function CapacityCards() {
                 </SelectedDescription>
               </SelectedTitle>
               <ButtonGroup>
-                <DemoButton>See Demo</DemoButton>
-                <OpenButton>Open</OpenButton>
+                <DemoButton>See Details</DemoButton>
+                <OpenButton
+                  href={previousImage.linkTo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open
+                </OpenButton>
               </ButtonGroup>
             </TextOverlay>
           </Detail>
@@ -444,8 +467,14 @@ function CapacityCards() {
                 </SelectedDescription>
               </SelectedTitle>
               <ButtonGroup>
-                <DemoButton>See Demo</DemoButton>
-                <OpenButton>Open</OpenButton>
+                <DemoButton>See Details</DemoButton>
+                <OpenButton
+                  href={selectedImage.linkTo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open
+                </OpenButton>
               </ButtonGroup>
             </TextOverlay>
           </Detail>
@@ -464,13 +493,15 @@ function CapacityCards() {
                       id: 1,
                       srcL: CapacityStrategicL,
                       srcR: CapacityStrategicR,
-                      title: `Facility Planner`,
+                      title: `Capacity Planner`,
                       description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
+                      linkTo: "https://miebach-capacity-tool.azurewebsites.net",
                     })
                   }
                   selected={selectedImage?.id === 1}
+                  hasLink={true}
                 ></Image>
-                <CardTitle>Facility Planner</CardTitle>
+                <CardTitle>Capacity Planner</CardTitle>
               </CardContent>
             </LeftTop>
             <RightTop>
@@ -489,9 +520,12 @@ function CapacityCards() {
                             srcR: CapacityTacticalR,
                             title: `Seasonal DC Planner`,
                             description: `A tactical planning tool facilitates visibility, foresight, and capacity planning capabilities. It allows for dynamic system configuration updates, improves master data management, and offers support for routing, housekeeping and returns activities to ensure accurate and efficient planning and operations management.`,
+                            linkTo:
+                              "https://routing-tool-miebach.azurewebsites.net",
                           })
                         }
                         selected={selectedImage?.id === 2}
+                        hasLink={true}
                       ></Image>
                       <CardTitle>Seasonal DC Planner</CardTitle>
                     </CardContent>
@@ -504,17 +538,20 @@ function CapacityCards() {
                       <Image
                         key={3}
                         src={CapacityOperationalR}
-                        onClick={() =>
+                        /* onClick={() =>
                           selectImage({
                             id: 3,
                             srcL: CapacityOperationalL,
                             srcR: CapacityOperationalR,
                             title: `Operational Planning`,
-                            description: `![No Data, placeholder only]`,
+                            description: "",
                           })
-                        }
+                        } */
                         selected={selectedImage?.id === 3}
-                      ></Image>
+                        hasLink={false}
+                      >
+                        <DisabledOverlay />
+                      </Image>
                       <CardTitle>Operational Planning</CardTitle>
                     </CardContent>
                   </OperationalDiv>
@@ -534,9 +571,12 @@ function CapacityCards() {
                           srcR: CapacityWarehouseR,
                           title: `Logistic Facility Designer`,
                           description: `A warehouse design tool helps fast-growing companies to build facility profiles - operational areas, sizing, storage technology, material handling equipment, investments and costs, with 50 years of Miebach know-how in facility design. Client can use this customizable and configurable app to assess different design alternatives in a self-service, agile and scalable manner.`,
+                          linkTo:
+                            "https://warehouse-conceptual-design.azurewebsites.net",
                         })
                       }
                       selected={selectedImage?.id === 4}
+                      hasLink={true}
                     ></WarehouseImage>
                     <CardTitle>Logistic Facility Designer</CardTitle>
                   </CardContent>
@@ -549,17 +589,20 @@ function CapacityCards() {
               <Image
                 key={5}
                 src={CapacityControlR}
-                onClick={() =>
+                /* onClick={() =>
                   selectImage({
                     id: 5,
                     srcL: CapacityControlL,
                     srcR: CapacityControlR,
                     title: `Control Tower`,
-                    description: `![No Data, placeholder only]`,
+                    description: "",
                   })
-                }
+                } */
                 selected={selectedImage?.id === 5}
-              ></Image>
+                hasLink={false}
+              >
+                <DisabledOverlay />
+              </Image>
               <CardTitle>Control Tower</CardTitle>
             </CardContent>
           </SecondRow>

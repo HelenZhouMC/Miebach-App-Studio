@@ -159,7 +159,7 @@ const DemoButton = styled(Link)`
   font-weight: 400;
   margin-right: 2%;
 `;
-const OpenButton = styled(Link)`
+const OpenButton = styled.a`
   display: flex;
   padding: 1% 3%;
   justify-content: center;
@@ -175,6 +175,24 @@ const OpenButton = styled(Link)`
   font-style: normal;
   font-weight: 400;
   margin-left: 2%;
+  cursor: pointer;
+`;
+const DisabledOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 5;
+`;
+const ModifiedCard = styled(Card)`
+  pointer-events: ${(props) => (!props.hasLink ? "none" : "auto")};
+  &:hover {
+    ${CardsBG} {
+      transform: ${(props) => (props.hasLink ? "scale(1.1)" : "scale(1)")};
+    }
+  }
 `;
 
 function HomeCards() {
@@ -190,9 +208,10 @@ function HomeCards() {
     {
       id: 1,
       imgUrl: CapacityStrategic,
-      title: "Facility Planner",
+      title: "Capacity Planner",
       description: `
       As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
+      linkTo: "https://miebach-capacity-tool.azurewebsites.net",
     },
     {
       id: 2,
@@ -200,12 +219,13 @@ function HomeCards() {
       title: "Seasonal DC Planner",
       description:
         "A tactical planning tool facilitates visibility, foresight, and capacity planning capabilities. It allows for dynamic system configuration updates, improves master data management, and offers support for routing, housekeeping and returns activities to ensure accurate and efficient planning and operations management.",
+      linkTo: "https://routing-tool-miebach.azurewebsites.net",
     },
     {
       id: 3,
       imgUrl: CapacityOperational,
       title: "Operational Planning",
-      description: "PlaceHolder",
+      description: "",
     },
     {
       id: 4,
@@ -213,12 +233,13 @@ function HomeCards() {
       title: "Logistic Facility Designer",
       description:
         "A warehouse design tool helps fast-growing companies to build facility profiles - operational areas, sizing, storage technology, material handling equipment, investments and costs, with 50 years of Miebach know-how in facility design. Client can use this customizable and configurable app to assess different design alternatives in a self-service, agile and scalable manner.",
+      linkTo: "https://warehouse-conceptual-design.azurewebsites.net",
     },
     {
       id: 5,
       imgUrl: CapacityControl,
       title: "Control Tower",
-      description: "PlaceHolder",
+      description: "",
     },
     {
       id: 6,
@@ -226,55 +247,67 @@ function HomeCards() {
       title: "Forecast Tool",
       description:
         "The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.",
+      linkTo: "https://miebach-returnables.azurewebsites.net",
     },
     {
       id: 7,
       imgUrl: PowerPredictive,
       title: "Predictive Data Models",
-      description: "PlaceHolder",
+      description: "",
     },
     {
       id: 8,
       imgUrl: PowerRoot,
       title: "Root Cause Detector",
-      description: "PlaceHolder",
+      description: "",
     },
     {
       id: 9,
       imgUrl: CostNetwork,
       title: "Network Cost to Serve and Flow Optimization",
-      description: "PlaceHolder",
+      description: "",
+      linkTo: "https://miebach-returnables.azurewebsites.net",
     },
     {
       id: 10,
       imgUrl: CostOperational,
       title: "Operational Cost to Serve and Flow Optimization",
-      description: "PlaceHolder",
+      description: "",
     },
   ];
 
   return (
     <CardsContainer>
       {cards.map((card) => (
-        <Card
+        <ModifiedCard
           key={card.id}
-          onMouseEnter={() => handleMouseEnter(card.id)}
-          onMouseLeave={() => handleMouseLeave(card.id)}
+          onMouseEnter={() => card.linkTo && handleMouseEnter(card.id)}
+          onMouseLeave={() => card.linkTo && handleMouseLeave(card.id)}
+          hasLink={Boolean(card.linkTo)}
         >
           <CardContent>
+            {!card.linkTo && <DisabledOverlay />}
             <CardsBG imgUrl={card.imgUrl} />
             <CardTitle isHovered={hoverStatus[card.id]}>{card.title}</CardTitle>
             <CardDetails>
               <CardDescription isHovered={hoverStatus[card.id]}>
                 {card.description}
               </CardDescription>
-              <ButtonGroup isHovered={hoverStatus[card.id]}>
-                <DemoButton>See Demo</DemoButton>
-                <OpenButton>Open</OpenButton>
-              </ButtonGroup>
+              {card.linkTo && (
+                <ButtonGroup isHovered={hoverStatus[card.id]}>
+                  <DemoButton>See Details</DemoButton>
+                  <OpenButton
+                    href={card.linkTo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open
+                  </OpenButton>
+                </ButtonGroup>
+              )}
             </CardDetails>
           </CardContent>
-        </Card>
+        </ModifiedCard>
       ))}
     </CardsContainer>
   );
