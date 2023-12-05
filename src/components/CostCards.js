@@ -11,7 +11,7 @@ const CardsContainer = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  margin-top: -5vh;
+  margin-top: -2vh;
   padding: 1% 1.5% 1% 2%;
   align-items: flex-start;
   align-content: flex-start;
@@ -88,7 +88,7 @@ const DetailContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to right, #141c1b 50%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to right, #141c1b 60%, rgba(0, 0, 0, 0) 100%);
     z-index: 2;
   }
   animation: ${(props) => {
@@ -120,9 +120,9 @@ const Detail = styled.div`
 `;
 const TextOverlay = styled.div`
   position: absolute;
-  top: 10%;
-  left: 5%;
-  bottom: 2%;
+  top: 5%;
+  left: 3%;
+  bottom: 1%;
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -140,12 +140,12 @@ const SelectedTitle = styled.div`
 `;
 const SelectedDescription = styled.div`
   color: #fff;
-  width: 60%;
+  width: 75%;
   font-size: ${(props) =>
     props.isExpanded ? "calc(18px + 10%)" : "calc(14px + 10%)"};
   font-style: normal;
   font-weight: ${(props) => (props.isExpanded ? "400" : "300")};
-  margin-top: 5%;
+  margin-top: 1%;
 `;
 const ButtonGroup = styled.div`
   display: flex;

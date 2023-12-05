@@ -16,7 +16,7 @@ import CostOperational from "../images/CostOperational.jpg";
 const CardsContainer = styled.div`
   display: flex;
   width: 100%;
-  margin-top: -5vh;
+  margin-top: -2vh;
   padding: 0% 0% 0% 4%;
   align-items: flex-start;
   align-content: flex-start;
