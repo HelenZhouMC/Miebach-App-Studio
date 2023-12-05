@@ -131,7 +131,8 @@ const TextOverlay = styled.div`
 `;
 const SelectedTitle = styled.div`
   color: #fff;
-  font-size: calc(20px + 20%);
+  font-size: ${(props) =>
+    props.isExpanded ? "calc(24px + 20%)" : "calc(20px + 20%)"};
   font-style: normal;
   font-weight: 600;
   max-height: 90%;
@@ -141,9 +142,10 @@ const SelectedTitle = styled.div`
 const SelectedDescription = styled.div`
   color: #fff;
   width: 60%;
-  font-size: calc(14px + 10%);
+  font-size: ${(props) =>
+    props.isExpanded ? "calc(18px + 10%)" : "calc(14px + 10%)"};
   font-style: normal;
-  font-weight: 300;
+  font-weight: ${(props) => (props.isExpanded ? "400" : "300")};
   margin-top: 5%;
 `;
 const ButtonGroup = styled.div`
@@ -237,6 +239,52 @@ const DisabledOverlay = styled.div`
   background-color: rgba(128, 128, 128, 0.5);
   z-index: 5;
 `;
+const ExpandIcon = styled.span`
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  cursor: pointer;
+  z-index: 10;
+  font-size: calc(20px + 10%);
+  color: #fff;
+  background-color: black;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const FullScreenContainer = styled.div`
+  position: relative;
+  height: 60vh;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, #141c1b 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 2;
+  }
+  animation: ${(props) => {
+      if (props.animationPhase === "out") {
+        return props.slidedirection === "up" ? slideOutUp : slideOutDown;
+      } else {
+        return props.slidedirection === "up" ? slideInUp : slideInDown;
+      }
+    }}
+    0.3s ease-in-out forwards;
+`;
 
 function PowerCards() {
   const [selectedImage, setSelectedImage] = useState({
@@ -249,6 +297,7 @@ function PowerCards() {
   });
   const [previousImage, setPreviousImage] = useState(null);
   const [animationPhase, setAnimationPhase] = useState("in");
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const selectImage = (image) => {
     if (selectedImage.id !== image.id) {
@@ -261,90 +310,131 @@ function PowerCards() {
       }, 300);
     }
   };
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
-    <CardsContainer>
-      {previousImage && animationPhase === "out" && (
-        <DetailContainer
-          slidedirection={previousImage.id > selectedImage.id ? "down" : "up"}
-          animationPhase={animationPhase}
-        >
-          <Detail>
-            <img src={previousImage.srcL} alt="selected card"></img>
-            <TextOverlay>
-              <SelectedTitle>
-                {previousImage.title}
-                <SelectedDescription>
-                  {previousImage.description}
-                </SelectedDescription>
-              </SelectedTitle>
-              <ButtonGroup>
-                <DemoButton>See Details</DemoButton>
-                <OpenButton
-                  href={previousImage.linkTo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open
-                </OpenButton>
-              </ButtonGroup>
-            </TextOverlay>
-          </Detail>
-        </DetailContainer>
-      )}
-      {selectedImage && animationPhase === "in" && (
-        <DetailContainer
+    <CardsContainer isExpanded={isExpanded}>
+      {isExpanded && (
+        <FullScreenContainer
           slidedirection={selectedImage.id > previousImage?.id ? "up" : "down"}
           animationPhase={animationPhase}
         >
-          <Detail>
-            <img src={selectedImage.srcL} alt="selected card"></img>
-            <TextOverlay>
-              <SelectedTitle>
-                {selectedImage.title}
-                <SelectedDescription>
-                  {selectedImage.description}
-                </SelectedDescription>
-              </SelectedTitle>
-              <ButtonGroup>
-                <DemoButton>See Details</DemoButton>
-                <OpenButton
-                  href={selectedImage.linkTo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open
-                </OpenButton>
-              </ButtonGroup>
-            </TextOverlay>
-          </Detail>
-        </DetailContainer>
+          <img src={selectedImage.srcL} alt="selected card"></img>
+          <ExpandIcon onClick={toggleExpand}>
+            <i class="bi bi-fullscreen-exit"></i>
+          </ExpandIcon>
+          <TextOverlay>
+            <SelectedTitle isExpanded={isExpanded}>
+              {selectedImage.title}
+              <SelectedDescription isExpanded={isExpanded}>
+                {selectedImage.description}
+              </SelectedDescription>
+            </SelectedTitle>
+            <ButtonGroup>
+              <DemoButton>See Details</DemoButton>
+              <OpenButton
+                href={selectedImage.linkTo}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open
+              </OpenButton>
+            </ButtonGroup>
+          </TextOverlay>
+        </FullScreenContainer>
       )}
-      <ImageContainer>
-        <CardContent>
-          <Image
-            key={1}
-            src={PowerDemandR}
-            onClick={() =>
-              selectImage({
-                id: 1,
-                srcL: PowerDemandL,
-                srcR: PowerDemandR,
-                title: `Forecast Tool`,
-                description: `The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
-                linkTo: "https://miebach-returnables.azurewebsites.net",
-              })
-            }
-            selected={selectedImage?.id === 1}
-            hasLink={true}
-          ></Image>
-          <CardTitle>Forecast Tool</CardTitle>
-        </CardContent>
-        <CardContent>
-          <Image
-            key={2}
-            src={PowerPredictiveR}
-            /* onClick={() =>
+      {!isExpanded && (
+        <>
+          {previousImage && animationPhase === "out" && (
+            <DetailContainer
+              slidedirection={
+                previousImage.id > selectedImage.id ? "down" : "up"
+              }
+              animationPhase={animationPhase}
+            >
+              <Detail>
+                <img src={previousImage.srcL} alt="selected card"></img>
+                <TextOverlay>
+                  <SelectedTitle>
+                    {previousImage.title}
+                    <SelectedDescription>
+                      {previousImage.description}
+                    </SelectedDescription>
+                  </SelectedTitle>
+                  <ButtonGroup>
+                    <DemoButton>See Details</DemoButton>
+                    <OpenButton
+                      href={previousImage.linkTo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open
+                    </OpenButton>
+                  </ButtonGroup>
+                </TextOverlay>
+              </Detail>
+            </DetailContainer>
+          )}
+          {selectedImage && animationPhase === "in" && (
+            <DetailContainer
+              slidedirection={
+                selectedImage.id > previousImage?.id ? "up" : "down"
+              }
+              animationPhase={animationPhase}
+            >
+              <Detail>
+                <img src={selectedImage.srcL} alt="selected card"></img>
+                <ExpandIcon onClick={toggleExpand}>
+                  <i class="bi bi-fullscreen"></i>
+                </ExpandIcon>
+                <TextOverlay>
+                  <SelectedTitle>
+                    {selectedImage.title}
+                    <SelectedDescription>
+                      {selectedImage.description}
+                    </SelectedDescription>
+                  </SelectedTitle>
+                  <ButtonGroup>
+                    <DemoButton>See Details</DemoButton>
+                    <OpenButton
+                      href={selectedImage.linkTo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open
+                    </OpenButton>
+                  </ButtonGroup>
+                </TextOverlay>
+              </Detail>
+            </DetailContainer>
+          )}
+          <ImageContainer>
+            <CardContent>
+              <Image
+                key={1}
+                src={PowerDemandR}
+                onClick={() =>
+                  selectImage({
+                    id: 1,
+                    srcL: PowerDemandL,
+                    srcR: PowerDemandR,
+                    title: `Forecast Tool`,
+                    description: `The Forecast tool enhances forecast accuracy, optimizes inventory, reduces costs, improves service, and enables scenario planning. It accurately predicts returns, avoids inventory imbalances, meets customer demands, and allows for informed decision-making based on various scenarios.`,
+                    linkTo: "https://miebach-returnables.azurewebsites.net",
+                  })
+                }
+                selected={selectedImage?.id === 1}
+                hasLink={true}
+              ></Image>
+              <CardTitle>Forecast Tool</CardTitle>
+            </CardContent>
+            <CardContent>
+              <Image
+                key={2}
+                src={PowerPredictiveR}
+                /* onClick={() =>
               selectImage({
                 id: 2,
                 srcL: PowerPredictiveL,
@@ -353,18 +443,18 @@ function PowerCards() {
                 description: "",
               })
             } */
-            selected={selectedImage?.id === 2}
-            hasLink={false}
-          >
-            <DisabledOverlay />
-          </Image>
-          <CardTitle>Predictive Data Models</CardTitle>
-        </CardContent>
-        <CardContent>
-          <Image
-            key={3}
-            src={PowerRootR}
-            /* onClick={() =>
+                selected={selectedImage?.id === 2}
+                hasLink={false}
+              >
+                <DisabledOverlay />
+              </Image>
+              <CardTitle>Predictive Data Models</CardTitle>
+            </CardContent>
+            <CardContent>
+              <Image
+                key={3}
+                src={PowerRootR}
+                /* onClick={() =>
               selectImage({
                 id: 3,
                 srcL: PowerRootL,
@@ -373,14 +463,16 @@ function PowerCards() {
                 description: "",
               })
             } */
-            selected={selectedImage?.id === 3}
-            hasLink={false}
-          >
-            <DisabledOverlay />
-          </Image>
-          <CardTitle>Root cause detector</CardTitle>
-        </CardContent>
-      </ImageContainer>
+                selected={selectedImage?.id === 3}
+                hasLink={false}
+              >
+                <DisabledOverlay />
+              </Image>
+              <CardTitle>Root cause detector</CardTitle>
+            </CardContent>
+          </ImageContainer>
+        </>
+      )}
     </CardsContainer>
   );
 }

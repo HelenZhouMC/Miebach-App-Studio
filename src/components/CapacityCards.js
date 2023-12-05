@@ -24,6 +24,15 @@ const CardsContainer = styled.div`
   flex-wrap: wrap;
   border-radius: 16px;
   z-index: 3;
+  ${({ isExpanded }) =>
+    isExpanded &&
+    `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  `}
 `;
 const slideInUp = keyframes`
   from {
@@ -95,6 +104,14 @@ const DetailContainer = styled.div`
       }
     }}
     0.3s ease-in-out forwards;
+  ${({ isExpanded }) =>
+    isExpanded &&
+    `
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: none;
+  `}
 `;
 const Detail = styled.div`
   position: absolute;
@@ -125,7 +142,8 @@ const TextOverlay = styled.div`
 `;
 const SelectedTitle = styled.div`
   color: #fff;
-  font-size: calc(20px + 20%);
+  font-size: ${(props) =>
+    props.isExpanded ? "calc(24px + 20%)" : "calc(20px + 20%)"};
   font-style: normal;
   font-weight: 600;
   max-height: 90%;
@@ -135,9 +153,10 @@ const SelectedTitle = styled.div`
 const SelectedDescription = styled.div`
   color: #fff;
   width: 60%;
-  font-size: calc(14px + 10%);
+  font-size: ${(props) =>
+    props.isExpanded ? "calc(18px + 10%)" : "calc(14px + 10%)"};
   font-style: normal;
-  font-weight: 300;
+  font-weight: ${(props) => (props.isExpanded ? "400" : "300")};
   margin-top: 5%;
 `;
 const ButtonGroup = styled.div`
@@ -397,6 +416,21 @@ const DisabledOverlay = styled.div`
   background-color: rgba(128, 128, 128, 0.5);
   z-index: 5;
 `;
+const ExpandIcon = styled.span`
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  cursor: pointer;
+  z-index: 10;
+  font-size: calc(20px + 10%);
+  color: #fff;
+  background-color: black;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 function CapacityCards() {
   const [selectedImage, setSelectedImage] = useState({
@@ -409,6 +443,7 @@ function CapacityCards() {
   });
   const [previousImage, setPreviousImage] = useState(null);
   const [animationPhase, setAnimationPhase] = useState("in");
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const selectImage = (image) => {
     if (selectedImage.id !== image.id) {
@@ -421,48 +456,23 @@ function CapacityCards() {
       }, 300);
     }
   };
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
-    <CardsContainer>
-      {previousImage && animationPhase === "out" && (
-        <DetailContainer
-          slidedirection={previousImage.id > selectedImage.id ? "down" : "up"}
-          animationPhase={animationPhase}
-        >
-          <Detail>
-            <img src={previousImage.srcL} alt="selected card"></img>
-            <TextOverlay>
-              <SelectedTitle>
-                {previousImage.title}
-                <SelectedDescription>
-                  {previousImage.description}
-                </SelectedDescription>
-              </SelectedTitle>
-              <ButtonGroup>
-                <DemoButton>See Details</DemoButton>
-                <OpenButton
-                  href={previousImage.linkTo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open
-                </OpenButton>
-              </ButtonGroup>
-            </TextOverlay>
-          </Detail>
-        </DetailContainer>
-      )}
-      {selectedImage && animationPhase === "in" && (
-        <DetailContainer
-          slidedirection={selectedImage.id > previousImage?.id ? "up" : "down"}
-          animationPhase={animationPhase}
-        >
+    <CardsContainer isExpanded={isExpanded}>
+      {isExpanded && (
+        <DetailContainer>
           <Detail>
             <img src={selectedImage.srcL} alt="selected card"></img>
+            <ExpandIcon onClick={toggleExpand}>
+              <i class="bi bi-fullscreen-exit"></i>
+            </ExpandIcon>
             <TextOverlay>
-              <SelectedTitle>
+              <SelectedTitle isExpanded={isExpanded}>
                 {selectedImage.title}
-                <SelectedDescription>
+                <SelectedDescription isExpanded={isExpanded}>
                   {selectedImage.description}
                 </SelectedDescription>
               </SelectedTitle>
@@ -480,65 +490,131 @@ function CapacityCards() {
           </Detail>
         </DetailContainer>
       )}
-      <ImageContainer>
-        <RowBox>
-          <FirstRow>
-            <LeftTop>
-              <CardContent>
-                <Image
-                  key={1}
-                  src={CapacityStrategicR}
-                  onClick={() =>
-                    selectImage({
-                      id: 1,
-                      srcL: CapacityStrategicL,
-                      srcR: CapacityStrategicR,
-                      title: `Capacity Planner`,
-                      description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
-                      linkTo: "https://miebach-capacity-tool.azurewebsites.net",
-                    })
-                  }
-                  selected={selectedImage?.id === 1}
-                  hasLink={true}
-                ></Image>
-                <CardTitle>Capacity Planner</CardTitle>
-              </CardContent>
-            </LeftTop>
-            <RightTop>
-              <SubRightTop>
-                <TacticalBox>
-                  <FirstArrow>{">"}</FirstArrow>
-                  <TacticalDiv>
-                    <CardContent>
-                      <Image
-                        key={2}
-                        src={CapacityTacticalR}
-                        onClick={() =>
-                          selectImage({
-                            id: 2,
-                            srcL: CapacityTacticalL,
-                            srcR: CapacityTacticalR,
-                            title: `Seasonal DC Planner`,
-                            description: `A tactical planning tool facilitates visibility, foresight, and capacity planning capabilities. It allows for dynamic system configuration updates, improves master data management, and offers support for routing, housekeeping and returns activities to ensure accurate and efficient planning and operations management.`,
-                            linkTo:
-                              "https://routing-tool-miebach.azurewebsites.net",
-                          })
-                        }
-                        selected={selectedImage?.id === 2}
-                        hasLink={true}
-                      ></Image>
-                      <CardTitle>Seasonal DC Planner</CardTitle>
-                    </CardContent>
-                  </TacticalDiv>
-                </TacticalBox>
-                <OperationalBox>
-                  <EmptyDiv></EmptyDiv>
-                  <OperationalDiv>
-                    <CardContent>
-                      <Image
-                        key={3}
-                        src={CapacityOperationalR}
-                        /* onClick={() =>
+      {!isExpanded && (
+        <>
+          {previousImage && animationPhase === "out" && (
+            <DetailContainer
+              slidedirection={
+                previousImage.id > selectedImage.id ? "down" : "up"
+              }
+              animationPhase={animationPhase}
+            >
+              <Detail>
+                <img src={previousImage.srcL} alt="selected card"></img>
+                <TextOverlay>
+                  <SelectedTitle>
+                    {previousImage.title}
+                    <SelectedDescription>
+                      {previousImage.description}
+                    </SelectedDescription>
+                  </SelectedTitle>
+                  <ButtonGroup>
+                    <DemoButton>See Details</DemoButton>
+                    <OpenButton
+                      href={previousImage.linkTo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open
+                    </OpenButton>
+                  </ButtonGroup>
+                </TextOverlay>
+              </Detail>
+            </DetailContainer>
+          )}
+          {selectedImage && animationPhase === "in" && (
+            <DetailContainer
+              slidedirection={
+                selectedImage.id > previousImage?.id ? "up" : "down"
+              }
+              animationPhase={animationPhase}
+            >
+              <Detail>
+                <img src={selectedImage.srcL} alt="selected card"></img>
+                <ExpandIcon onClick={toggleExpand}>
+                  <i class="bi bi-fullscreen"></i>
+                </ExpandIcon>
+                <TextOverlay>
+                  <SelectedTitle>
+                    {selectedImage.title}
+                    <SelectedDescription>
+                      {selectedImage.description}
+                    </SelectedDescription>
+                  </SelectedTitle>
+                  <ButtonGroup>
+                    <DemoButton>See Details</DemoButton>
+                    <OpenButton
+                      href={selectedImage.linkTo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open
+                    </OpenButton>
+                  </ButtonGroup>
+                </TextOverlay>
+              </Detail>
+            </DetailContainer>
+          )}
+          <ImageContainer>
+            <RowBox>
+              <FirstRow>
+                <LeftTop>
+                  <CardContent>
+                    <Image
+                      key={1}
+                      src={CapacityStrategicR}
+                      onClick={() =>
+                        selectImage({
+                          id: 1,
+                          srcL: CapacityStrategicL,
+                          srcR: CapacityStrategicR,
+                          title: `Capacity Planner`,
+                          description: `As your business grows and introduces new products with varying complexities and storage needs, our Capacity Planner Tool becomes indispensable for optimizing your warehouse within these constraints. Seamlessly integrating data from multiple sources, it comprehensively addresses capacity and storage constraints, offering global accessibility for informed and strategic decision-making. Equip yourself for the future with precision.`,
+                          linkTo:
+                            "https://miebach-capacity-tool.azurewebsites.net",
+                        })
+                      }
+                      selected={selectedImage?.id === 1}
+                      hasLink={true}
+                    ></Image>
+                    <CardTitle>Capacity Planner</CardTitle>
+                  </CardContent>
+                </LeftTop>
+                <RightTop>
+                  <SubRightTop>
+                    <TacticalBox>
+                      <FirstArrow>{">"}</FirstArrow>
+                      <TacticalDiv>
+                        <CardContent>
+                          <Image
+                            key={2}
+                            src={CapacityTacticalR}
+                            onClick={() =>
+                              selectImage({
+                                id: 2,
+                                srcL: CapacityTacticalL,
+                                srcR: CapacityTacticalR,
+                                title: `Seasonal DC Planner`,
+                                description: `A tactical planning tool facilitates visibility, foresight, and capacity planning capabilities. It allows for dynamic system configuration updates, improves master data management, and offers support for routing, housekeeping and returns activities to ensure accurate and efficient planning and operations management.`,
+                                linkTo:
+                                  "https://routing-tool-miebach.azurewebsites.net",
+                              })
+                            }
+                            selected={selectedImage?.id === 2}
+                            hasLink={true}
+                          ></Image>
+                          <CardTitle>Seasonal DC Planner</CardTitle>
+                        </CardContent>
+                      </TacticalDiv>
+                    </TacticalBox>
+                    <OperationalBox>
+                      <EmptyDiv></EmptyDiv>
+                      <OperationalDiv>
+                        <CardContent>
+                          <Image
+                            key={3}
+                            src={CapacityOperationalR}
+                            /* onClick={() =>
                           selectImage({
                             id: 3,
                             srcL: CapacityOperationalL,
@@ -547,49 +623,49 @@ function CapacityCards() {
                             description: "",
                           })
                         } */
-                        selected={selectedImage?.id === 3}
-                        hasLink={false}
-                      >
-                        <DisabledOverlay />
-                      </Image>
-                      <CardTitle>Operational Planning</CardTitle>
-                    </CardContent>
-                  </OperationalDiv>
-                </OperationalBox>
-              </SubRightTop>
-              <SubRightBottom>
-                <SecondArrow>{">"}</SecondArrow>
-                <WarehouseDiv>
-                  <CardContent>
-                    <WarehouseImage
-                      key={4}
-                      src={CapacityWarehouseR}
-                      onClick={() =>
-                        selectImage({
-                          id: 4,
-                          srcL: CapacityWarehouseL,
-                          srcR: CapacityWarehouseR,
-                          title: `Logistic Facility Designer`,
-                          description: `A warehouse design tool helps fast-growing companies to build facility profiles - operational areas, sizing, storage technology, material handling equipment, investments and costs, with 50 years of Miebach know-how in facility design. Client can use this customizable and configurable app to assess different design alternatives in a self-service, agile and scalable manner.`,
-                          linkTo:
-                            "https://warehouse-conceptual-design.azurewebsites.net",
-                        })
-                      }
-                      selected={selectedImage?.id === 4}
-                      hasLink={true}
-                    ></WarehouseImage>
-                    <CardTitle>Logistic Facility Designer</CardTitle>
-                  </CardContent>
-                </WarehouseDiv>
-              </SubRightBottom>
-            </RightTop>
-          </FirstRow>
-          <SecondRow>
-            <CardContent>
-              <Image
-                key={5}
-                src={CapacityControlR}
-                /* onClick={() =>
+                            selected={selectedImage?.id === 3}
+                            hasLink={false}
+                          >
+                            <DisabledOverlay />
+                          </Image>
+                          <CardTitle>Operational Planning</CardTitle>
+                        </CardContent>
+                      </OperationalDiv>
+                    </OperationalBox>
+                  </SubRightTop>
+                  <SubRightBottom>
+                    <SecondArrow>{">"}</SecondArrow>
+                    <WarehouseDiv>
+                      <CardContent>
+                        <WarehouseImage
+                          key={4}
+                          src={CapacityWarehouseR}
+                          onClick={() =>
+                            selectImage({
+                              id: 4,
+                              srcL: CapacityWarehouseL,
+                              srcR: CapacityWarehouseR,
+                              title: `Logistic Facility Designer`,
+                              description: `A warehouse design tool helps fast-growing companies to build facility profiles - operational areas, sizing, storage technology, material handling equipment, investments and costs, with 50 years of Miebach know-how in facility design. Client can use this customizable and configurable app to assess different design alternatives in a self-service, agile and scalable manner.`,
+                              linkTo:
+                                "https://warehouse-conceptual-design.azurewebsites.net",
+                            })
+                          }
+                          selected={selectedImage?.id === 4}
+                          hasLink={true}
+                        ></WarehouseImage>
+                        <CardTitle>Logistic Facility Designer</CardTitle>
+                      </CardContent>
+                    </WarehouseDiv>
+                  </SubRightBottom>
+                </RightTop>
+              </FirstRow>
+              <SecondRow>
+                <CardContent>
+                  <Image
+                    key={5}
+                    src={CapacityControlR}
+                    /* onClick={() =>
                   selectImage({
                     id: 5,
                     srcL: CapacityControlL,
@@ -598,16 +674,18 @@ function CapacityCards() {
                     description: "",
                   })
                 } */
-                selected={selectedImage?.id === 5}
-                hasLink={false}
-              >
-                <DisabledOverlay />
-              </Image>
-              <CardTitle>Control Tower</CardTitle>
-            </CardContent>
-          </SecondRow>
-        </RowBox>
-      </ImageContainer>
+                    selected={selectedImage?.id === 5}
+                    hasLink={false}
+                  >
+                    <DisabledOverlay />
+                  </Image>
+                  <CardTitle>Control Tower</CardTitle>
+                </CardContent>
+              </SecondRow>
+            </RowBox>
+          </ImageContainer>
+        </>
+      )}
     </CardsContainer>
   );
 }
