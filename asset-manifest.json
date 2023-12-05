@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Miebach-App-Studio/static/css/main.cf93f213.css",
-    "main.js": "/Miebach-App-Studio/static/js/main.534a3bbf.js",
+    "main.js": "/Miebach-App-Studio/static/js/main.038986e1.js",
     "static/media/CostNetwork.png": "/Miebach-App-Studio/static/media/CostNetwork.f10a7533a28f2eb92d83.png",
     "static/media/CostNetworkR.png": "/Miebach-App-Studio/static/media/CostNetworkR.792a9a1eced5a5814357.png",
     "static/media/CostNetworkL.png": "/Miebach-App-Studio/static/media/CostNetworkL.ab1a0cc2fd76a633e865.png",
@@ -37,10 +37,10 @@
     "static/media/bootstrap-icons.woff2?": "/Miebach-App-Studio/static/media/bootstrap-icons.dea24bf5a7646d8b84e7.woff2",
     "index.html": "/Miebach-App-Studio/index.html",
     "main.cf93f213.css.map": "/Miebach-App-Studio/static/css/main.cf93f213.css.map",
-    "main.534a3bbf.js.map": "/Miebach-App-Studio/static/js/main.534a3bbf.js.map"
+    "main.038986e1.js.map": "/Miebach-App-Studio/static/js/main.038986e1.js.map"
   },
   "entrypoints": [
     "static/css/main.cf93f213.css",
-    "static/js/main.534a3bbf.js"
+    "static/js/main.038986e1.js"
   ]
 }
