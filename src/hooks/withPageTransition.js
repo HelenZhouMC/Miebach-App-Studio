@@ -2,6 +2,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
+//switch between tasks: click right, slide left; click left, slide right;
 const withPageTransition = (Component) => {
   return (props) => {
     const location = useLocation();

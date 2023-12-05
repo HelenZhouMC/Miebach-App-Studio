@@ -459,7 +459,9 @@ function CapacityCards() {
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-
+  //isExpanded true then show another full screen of CardDetails
+  //PreviousImage and SelectedImage are same, only animation difference
+  //ImageContainer is the layout of the cards in capacity
   return (
     <CardsContainer isExpanded={isExpanded}>
       {isExpanded && (

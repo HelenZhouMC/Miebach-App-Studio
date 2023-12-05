@@ -90,7 +90,7 @@ const MyAccount = styled(Link)`
   font-weight: 400;
   text-decoration: none;
 `;
-
+//Difference between Home.js, Capacity.js, Cost.js, Power.js: Font weight in <Task>; and animation name.
 function Home() {
   return (
     <Background>

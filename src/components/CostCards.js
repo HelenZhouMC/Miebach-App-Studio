@@ -298,7 +298,7 @@ function CostCards() {
   const [previousImage, setPreviousImage] = useState(null);
   const [animationPhase, setAnimationPhase] = useState("in");
   const [isExpanded, setIsExpanded] = useState(false);
-
+  //setTimeout: important,if without the function, React can not identify the state's changes
   const selectImage = (image) => {
     if (selectedImage.id !== image.id) {
       setAnimationPhase("out");

@@ -12,7 +12,7 @@ import PowerPredictive from "../images/PowerPredictive.jpg";
 import PowerRoot from "../images/PowerRoot.jpg";
 import CostNetwork from "../images/CostNetwork.png";
 import CostOperational from "../images/CostOperational.jpg";
-
+//Grey background (hasLink false) means not accessible, no animation, no details and no links.
 const CardsContainer = styled.div`
   display: flex;
   width: 100%;
@@ -93,6 +93,7 @@ const CardContent = styled.div`
     opacity: 1;
   }
 `;
+//Add animation on showing cards titles and cards description
 const CardTitle = styled.div`
   position: absolute;
   bottom: 5%;
@@ -194,7 +195,7 @@ const ModifiedCard = styled(Card)`
     }
   }
 `;
-
+//pointer and animation shown on cards. Give each card a state.
 function HomeCards() {
   const [hoverStatus, setHoverStatus] = useState({});
   const handleMouseEnter = (cardId) => {

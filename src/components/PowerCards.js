@@ -285,7 +285,7 @@ const FullScreenContainer = styled.div`
     }}
     0.3s ease-in-out forwards;
 `;
-
+//srcL: image in selectedImage; srcR: image in cards layout;
 function PowerCards() {
   const [selectedImage, setSelectedImage] = useState({
     id: 1,

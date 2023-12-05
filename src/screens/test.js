@@ -27,7 +27,7 @@ const Header = styled.div`
   background-size: cover;
   position: relative;
 `;
-
+//download header picture
 function Test() {
   const headerRef = useRef(null);
 
